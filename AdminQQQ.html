@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        /* ... все стили из предыдущей версии (те же) ... */
         * {
             margin: 0;
             padding: 0;
@@ -384,6 +383,63 @@
             min-height: 60px;
         }
 
+        /* File input */
+        .file-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+
+        .file-input-label {
+            padding: 0.7rem 1.5rem;
+            border-radius: 1rem;
+            border: 2px dashed var(--md-sys-color-outline-variant);
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+            transition: border 0.2s, background 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+        }
+
+        .file-input-label:hover {
+            border-color: var(--md-sys-color-primary);
+            background: var(--md-sys-color-primary-container);
+        }
+
+        .file-input-label i {
+            font-size: 1.2rem;
+            color: var(--md-sys-color-primary);
+        }
+
+        .file-name {
+            font-size: 0.9rem;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.7;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .file-name i {
+            margin-right: 6px;
+            color: #23c55e;
+        }
+
+        .file-size {
+            font-size: 0.8rem;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.5;
+        }
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -394,6 +450,7 @@
             display: flex;
             gap: 0.8rem;
             margin-top: 0.5rem;
+            flex-wrap: wrap;
         }
 
         .btn-primary {
@@ -459,16 +516,6 @@
 
         .cards-list {
             margin-top: 1.5rem;
-        }
-
-        .cards-list-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--md-sys-color-on-surface-variant);
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .card-item {
@@ -565,6 +612,8 @@
             border: 1px solid var(--md-sys-color-outline-variant);
             box-shadow: 0 8px 28px rgba(0,0,0,0.15);
             color: var(--md-sys-color-on-surface);
+            max-width: 90%;
+            text-align: center;
         }
 
         .toast.success {
@@ -627,6 +676,13 @@
             background: #ff4d6d;
         }
 
+        .allowed-formats {
+            font-size: 0.75rem;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.5;
+            margin-top: 4px;
+        }
+
         @media (max-width: 700px) {
             .admin-card {
                 padding: 1.5rem 1.2rem;
@@ -652,6 +708,13 @@
             .card-item-actions {
                 width: 100%;
                 justify-content: flex-end;
+            }
+            .file-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .file-input-label {
+                justify-content: center;
             }
         }
 
@@ -742,9 +805,27 @@
                     </div>
                 </div>
 
+                <!-- ЗАГРУЗКА ФАЙЛА -->
                 <div class="form-group">
-                    <label>Добавить файл (название файла)</label>
+                    <label>Загрузить файл</label>
+                    <div class="file-input-wrapper">
+                        <label class="file-input-label" id="fileLabel">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            Выберите файл
+                            <input type="file" id="fileInput" accept=".apk,.zip,.ipa,.tipa,.sh" />
+                        </label>
+                        <span class="file-name" id="fileName"><i class="fas fa-file"></i> Файл не выбран</span>
+                        <span class="file-size" id="fileSize"></span>
+                    </div>
+                    <div class="allowed-formats">Допустимые форматы: .apk .zip .ipa .tipa .sh</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Название файла (для скачивания)</label>
                     <input type="text" id="cardFile" placeholder="LitvinTap.tipa" required />
+                    <small style="color:var(--md-sys-color-on-surface-variant); opacity:0.5; font-size:0.75rem;">
+                        Укажите название файла, под которым он будет скачиваться
+                    </small>
                 </div>
 
                 <div class="form-group">
@@ -795,7 +876,8 @@
         {
             "imports": {
                 "firebase/app": "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js",
-                "firebase/firestore": "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js"
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js",
+                "firebase/storage": "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js"
             }
         }
     </script>
@@ -803,6 +885,7 @@
     <script type="module">
         import { initializeApp } from "firebase/app";
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, onSnapshot } from "firebase/firestore";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
         // ===== Firebase =====
         const firebaseConfig = {
@@ -817,7 +900,8 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        const cardsCollection = collection(db, "cards");
+        const storage = getStorage(app);
+        const cardsCollection = collection(db, "Cards");
 
         // ===== DOM =====
         const statusDot = document.getElementById('statusDot');
@@ -829,6 +913,43 @@
         const submitBtn = document.getElementById('submitBtn');
         const clearAllBtn = document.getElementById('clearAllBtn');
 
+        // ===== FILE INPUT =====
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+        const fileSize = document.getElementById('fileSize');
+        const cardFileInput = document.getElementById('cardFile');
+        let uploadedFileUrl = null;
+        let uploadedFileName = null;
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (!file) {
+                fileName.innerHTML = '<i class="fas fa-file"></i> Файл не выбран';
+                fileSize.textContent = '';
+                return;
+            }
+
+            // Проверка расширения
+            const allowed = ['.apk', '.zip', '.ipa', '.tipa', '.sh'];
+            const ext = '.' + file.name.split('.').pop().toLowerCase();
+            if (!allowed.includes(ext)) {
+                showToast('Недопустимый формат файла! Разрешены: .apk .zip .ipa .tipa .sh', 'error');
+                this.value = '';
+                fileName.innerHTML = '<i class="fas fa-file"></i> Файл не выбран';
+                fileSize.textContent = '';
+                return;
+            }
+
+            fileName.innerHTML = `<i class="fas fa-check-circle" style="color:#23c55e;"></i> ${file.name}`;
+            fileSize.textContent = `(${(file.size / 1024 / 1024).toFixed(2)} MB)`;
+            uploadedFileName = file.name;
+
+            // Автозаполнение названия файла
+            if (!cardFileInput.value) {
+                cardFileInput.value = file.name;
+            }
+        });
+
         // ===== Статус =====
         function setStatus(online) {
             if (online) {
@@ -838,6 +959,21 @@
                 statusDot.className = 'dot offline';
                 statusText.textContent = 'Офлайн';
             }
+        }
+
+        // ===== Toast =====
+        function showToast(message, type = 'success') {
+            const old = document.querySelector('.toast');
+            if (old) old.remove();
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 4000);
         }
 
         // ===== Рендер карточек =====
@@ -872,12 +1008,11 @@
                 `;
                 cardsList.appendChild(div);
 
-                // удаление
                 div.querySelector('.btn-danger').addEventListener('click', async function() {
                     const id = this.dataset.id;
                     if (confirm('Удалить карточку "' + card.title + '"?')) {
                         try {
-                            await deleteDoc(doc(db, "cards", id));
+                            await deleteDoc(doc(db, "Cards", id));
                             showToast('Карточка удалена', 'success');
                         } catch (error) {
                             console.error('Ошибка удаления:', error);
@@ -888,22 +1023,7 @@
             });
         }
 
-        // ===== Toast уведомления =====
-        function showToast(message, type = 'success') {
-            const old = document.querySelector('.toast');
-            if (old) old.remove();
-
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            toast.textContent = message;
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
-        }
-
-        // ===== Подписка на изменения в Firestore =====
+        // ===== Подписка на изменения =====
         const q = query(cardsCollection, orderBy('createdAt', 'desc'));
 
         onSnapshot(q, (snapshot) => {
@@ -919,7 +1039,7 @@
             showToast('Ошибка подключения к Firebase', 'error');
         });
 
-        // ===== Добавление карточки =====
+        // ===== Добавление карточки с загрузкой файла =====
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -939,25 +1059,40 @@
             const features = featuresRaw.split(',').map(f => f.trim()).filter(f => f);
 
             submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="loading-spinner"></span> Добавление...';
+            submitBtn.innerHTML = '<span class="loading-spinner"></span> Загрузка...';
 
             try {
+                let fileUrl = file;
+
+                // Если выбран файл — загружаем в Storage
+                if (fileInput.files.length > 0) {
+                    const selectedFile = fileInput.files[0];
+                    const storageRef = ref(storage, `files/${Date.now()}_${selectedFile.name}`);
+                    await uploadBytes(storageRef, selectedFile);
+                    fileUrl = await getDownloadURL(storageRef);
+                }
+
                 await addDoc(cardsCollection, {
                     image: image,
                     title: title,
                     tag: tag || '',
                     version: version,
                     requirements: requirements,
-                    file: file,
+                    file: fileUrl,
+                    fileName: fileInput.files.length > 0 ? fileInput.files[0].name : file,
                     features: features,
                     createdAt: new Date().toISOString()
                 });
 
                 form.reset();
+                fileName.innerHTML = '<i class="fas fa-file"></i> Файл не выбран';
+                fileSize.textContent = '';
+                uploadedFileUrl = null;
+                uploadedFileName = null;
                 showToast('Карточка успешно добавлена!', 'success');
             } catch (error) {
                 console.error('Ошибка добавления:', error);
-                showToast('Ошибка при добавлении карточки', 'error');
+                showToast('Ошибка при добавлении карточки: ' + error.message, 'error');
             }
 
             submitBtn.disabled = false;
