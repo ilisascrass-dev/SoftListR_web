@@ -9,16 +9,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            display: flex; flex-direction: column; align-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 2rem 1.5rem;
             background: var(--md-sys-color-background);
             color: var(--md-sys-color-on-background);
             transition: background 0.3s ease, color 0.2s ease;
         }
+
         :root {
             --md-sys-color-primary: #1b3bff;
             --md-sys-color-on-primary: #ffffff;
@@ -57,6 +65,7 @@
             --md-sys-color-surface-container-high: #e6e5ec;
             --md-sys-color-surface-container-highest: #dad9e0;
         }
+
         [data-theme="dark"] {
             --md-sys-color-primary: #b9c3ff;
             --md-sys-color-on-primary: #1a2a8a;
@@ -95,251 +104,640 @@
             --md-sys-color-surface-container-high: #2a2a32;
             --md-sys-color-surface-container-highest: #35353d;
         }
-        .page-container { max-width: 900px; width: 100%; }
+
+        .page-container {
+            max-width: 900px;
+            width: 100%;
+        }
+
         .top-bar {
-            width: 100%; padding: 1rem 1.5rem;
-            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
             margin-bottom: 2rem;
             background: var(--md-sys-color-surface-container);
-            border-radius: 2rem; border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 2rem;
+            border: 1px solid var(--md-sys-color-outline-variant);
             transition: background 0.3s, border 0.3s;
         }
-        [data-theme="dark"] .top-bar { background: var(--md-sys-color-surface-container-high); border-color: var(--md-sys-color-surface-variant); }
-        .brand-group { display: flex; align-items: center; gap: 0.8rem; }
+
+        [data-theme="dark"] .top-bar {
+            background: var(--md-sys-color-surface-container-high);
+            border-color: var(--md-sys-color-surface-variant);
+        }
+
+        .brand-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
         .logo-icon {
-            width: 44px; height: 44px;
-            background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
-            border-radius: 14px; display: flex; align-items: center; justify-content: center;
-            font-size: 22px; transition: background 0.25s, color 0.25s;
+            width: 44px;
+            height: 44px;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            transition: background 0.25s, color 0.25s;
             box-shadow: 0 4px 10px -4px var(--md-sys-color-primary);
             flex-shrink: 0;
         }
-        .brand-name { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.02em; color: var(--md-sys-color-on-surface); transition: color 0.2s; }
-        .brand-sub { font-size: 0.8rem; font-weight: 500; color: var(--md-sys-color-on-surface-variant); opacity: 0.7; margin-left: 4px; }
-        .settings-wrapper { position: relative; display: inline-block; }
+
+        .brand-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--md-sys-color-on-surface);
+            transition: color 0.2s;
+        }
+
+        .brand-sub {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.7;
+            margin-left: 4px;
+        }
+
+        .settings-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
         .settings-icon {
-            width: 44px; height: 44px; border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
             background: var(--md-sys-color-surface-container-high);
             border: 1px solid var(--md-sys-color-outline-variant);
             color: var(--md-sys-color-on-surface-variant);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
             transition: background 0.2s, border 0.2s, transform 0.15s;
         }
-        .settings-icon:hover { background: var(--md-sys-color-surface-container-highest); border-color: var(--md-sys-color-primary); transform: scale(1.04); }
+
+        .settings-icon:hover {
+            background: var(--md-sys-color-surface-container-highest);
+            border-color: var(--md-sys-color-primary);
+            transform: scale(1.04);
+        }
+
         .settings-dropdown {
-            position: absolute; top: calc(100% + 12px); right: 0; min-width: 210px;
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            min-width: 210px;
             background: var(--md-sys-color-surface-container);
-            border-radius: 1.5rem; padding: 1.2rem 1.4rem;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.4rem;
             border: 1px solid var(--md-sys-color-outline-variant);
-            box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-            opacity: 0; visibility: hidden;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            visibility: hidden;
             transform: translateY(-8px) scale(0.96);
             transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-            transform-origin: top right; z-index: 10;
+            transform-origin: top right;
+            z-index: 10;
         }
+
         [data-theme="dark"] .settings-dropdown {
             background: var(--md-sys-color-surface-container-high);
-            box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
             border-color: var(--md-sys-color-surface-variant);
         }
-        .settings-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+
+        .settings-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
         .dropdown-title {
-            font-size: 0.75rem; font-weight: 600; color: var(--md-sys-color-on-surface-variant);
-            letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.8rem;
-            display: flex; align-items: center; gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface-variant);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .dropdown-title i { color: var(--md-sys-color-primary); }
-        .theme-switch-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
-        .theme-switch-row span { font-weight: 500; color: var(--md-sys-color-on-surface); }
-        .theme-icons { display: flex; align-items: center; gap: 8px; color: var(--md-sys-color-on-surface-variant); }
+
+        .dropdown-title i {
+            color: var(--md-sys-color-primary);
+        }
+
+        .theme-switch-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+        }
+
+        .theme-switch-row span {
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface);
+        }
+
+        .theme-icons {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--md-sys-color-on-surface-variant);
+        }
+
         .switch {
-            position: relative; display: inline-block;
-            width: 44px; height: 24px; flex-shrink: 0; cursor: pointer;
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 24px;
+            flex-shrink: 0;
+            cursor: pointer;
         }
-        .switch input { opacity: 0; width: 0; height: 0; }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
         .slider {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: var(--md-sys-color-surface-container-highest);
-            transition: 0.25s cubic-bezier(0.2, 0, 0, 1); border-radius: 40px;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+            transition: 0.25s cubic-bezier(0.2, 0, 0, 1);
+            border-radius: 40px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08);
         }
+
         .slider::before {
-            content: ""; position: absolute;
-            height: 18px; width: 18px; left: 3px; bottom: 3px;
+            content: "";
+            position: absolute;
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
             background: var(--md-sys-color-surface);
-            transition: 0.25s cubic-bezier(0.2, 0, 0, 1); border-radius: 50%;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            transition: 0.25s cubic-bezier(0.2, 0, 0, 1);
+            border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
         }
-        .switch input:checked+.slider { background: var(--md-sys-color-primary); }
-        .switch input:checked+.slider::before { transform: translateX(20px); background: var(--md-sys-color-on-primary); }
+
+        .switch input:checked+.slider {
+            background: var(--md-sys-color-primary);
+        }
+
+        .switch input:checked+.slider::before {
+            transform: translateX(20px);
+            background: var(--md-sys-color-on-primary);
+        }
 
         .admin-card {
             background: var(--md-sys-color-surface-container);
-            border-radius: 2rem; padding: 2rem 2.5rem;
+            border-radius: 2rem;
+            padding: 2rem 2.5rem;
             border: 1px solid var(--md-sys-color-outline-variant);
-            transition: background 0.3s, border 0.3s; margin-bottom: 2rem;
+            transition: background 0.3s, border 0.3s;
+            margin-bottom: 2rem;
         }
-        [data-theme="dark"] .admin-card { background: var(--md-sys-color-surface-container-high); border-color: var(--md-sys-color-surface-variant); }
-        .admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem; }
-        .admin-title { font-size: 1.4rem; font-weight: 600; color: var(--md-sys-color-on-surface); display: flex; align-items: center; gap: 12px; }
-        .admin-title i { color: var(--md-sys-color-primary); }
 
-        .form-group { margin-bottom: 1.2rem; }
-        .form-group label { display: block; font-weight: 500; font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); margin-bottom: 0.3rem; }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%; padding: 0.7rem 1rem; border-radius: 1rem;
+        [data-theme="dark"] .admin-card {
+            background: var(--md-sys-color-surface-container-high);
+            border-color: var(--md-sys-color-surface-variant);
+        }
+
+        .admin-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .admin-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .admin-title i {
+            color: var(--md-sys-color-primary);
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 0.3rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            border-radius: 1rem;
             border: 1px solid var(--md-sys-color-outline-variant);
             background: var(--md-sys-color-surface);
             color: var(--md-sys-color-on-surface);
-            font-family: 'Inter', sans-serif; font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
             transition: border 0.2s, background 0.3s;
         }
-        [data-theme="dark"] .form-group input, [data-theme="dark"] .form-group textarea, [data-theme="dark"] .form-group select {
+
+        [data-theme="dark"] .form-group input,
+        [data-theme="dark"] .form-group textarea {
             background: var(--md-sys-color-surface-container-low);
         }
-        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-            outline: none; border-color: var(--md-sys-color-primary);
-        }
-        .form-group textarea { resize: vertical; min-height: 60px; }
 
-        .file-input-wrapper { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-        .file-input-wrapper input[type="file"] { display: none; }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--md-sys-color-primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .file-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+
         .file-input-label {
-            padding: 0.7rem 1.5rem; border-radius: 1rem;
+            padding: 0.7rem 1.5rem;
+            border-radius: 1rem;
             border: 2px dashed var(--md-sys-color-outline-variant);
-            cursor: pointer; font-weight: 500; color: var(--md-sys-color-on-surface-variant);
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--md-sys-color-on-surface-variant);
             transition: border 0.2s, background 0.2s;
-            display: inline-flex; align-items: center; gap: 10px; font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
         }
-        .file-input-label:hover { border-color: var(--md-sys-color-primary); background: var(--md-sys-color-primary-container); }
-        .file-input-label i { font-size: 1.2rem; color: var(--md-sys-color-primary); }
-        .file-name { font-size: 0.9rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.7; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        .file-name i { margin-right: 6px; color: #23c55e; }
-        .file-size { font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.5; }
 
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .form-actions { display: flex; gap: 0.8rem; margin-top: 0.5rem; flex-wrap: wrap; }
+        .file-input-label:hover {
+            border-color: var(--md-sys-color-primary);
+            background: var(--md-sys-color-primary-container);
+        }
+
+        .file-input-label i {
+            font-size: 1.2rem;
+            color: var(--md-sys-color-primary);
+        }
+
+        .file-name {
+            font-size: 0.9rem;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.7;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .file-name i {
+            margin-right: 6px;
+            color: #23c55e;
+        }
+
+        .file-size {
+            font-size: 0.8rem;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.5;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+            flex-wrap: wrap;
+        }
 
         .btn-primary {
-            background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
-            border: none; font-weight: 600; font-size: 0.95rem;
-            padding: 0.7rem 2rem; border-radius: 60px;
-            display: inline-flex; align-items: center; gap: 10px;
-            cursor: pointer; transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            border: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
             box-shadow: 0 4px 12px -4px var(--md-sys-color-primary);
         }
-        .btn-primary:hover { filter: brightness(1.08); transform: scale(1.02) translateY(-2px); box-shadow: 0 8px 20px -6px var(--md-sys-color-primary); }
-        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+
+        .btn-primary:hover {
+            filter: brightness(1.08);
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 8px 20px -6px var(--md-sys-color-primary);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
 
         .btn-secondary {
             background: var(--md-sys-color-surface-container-highest);
             color: var(--md-sys-color-on-surface);
             border: 1px solid var(--md-sys-color-outline-variant);
-            font-weight: 500; font-size: 0.95rem; padding: 0.7rem 2rem;
-            border-radius: 60px; cursor: pointer;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.7rem 2rem;
+            border-radius: 60px;
+            cursor: pointer;
             transition: background 0.2s, border 0.2s;
         }
-        .btn-secondary:hover { background: var(--md-sys-color-surface-container-highest); border-color: var(--md-sys-color-primary); }
+
+        .btn-secondary:hover {
+            background: var(--md-sys-color-surface-container-highest);
+            border-color: var(--md-sys-color-primary);
+        }
 
         .btn-danger {
-            background: var(--md-sys-color-error); color: var(--md-sys-color-on-error);
-            border: none; font-weight: 500; font-size: 0.85rem; padding: 0.4rem 1rem;
-            border-radius: 60px; cursor: pointer; transition: opacity 0.2s;
+            background: var(--md-sys-color-error);
+            color: var(--md-sys-color-on-error);
+            border: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            padding: 0.4rem 1rem;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: opacity 0.2s;
         }
-        .btn-danger:hover { opacity: 0.8; }
 
-        .cards-list { margin-top: 1.5rem; }
+        .btn-danger:hover {
+            opacity: 0.8;
+        }
+
+        .cards-list {
+            margin-top: 1.5rem;
+        }
+
         .card-item {
-            display: flex; align-items: center; justify-content: space-between;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             padding: 0.8rem 1.2rem;
             background: var(--md-sys-color-surface-container-low);
-            border-radius: 1rem; border: 1px solid var(--md-sys-color-outline-variant);
-            margin-bottom: 0.6rem; transition: background 0.3s, border 0.3s;
+            border-radius: 1rem;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            margin-bottom: 0.6rem;
+            transition: background 0.3s, border 0.3s;
         }
-        [data-theme="dark"] .card-item { background: var(--md-sys-color-surface-container-low); }
-        .card-item-info { display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 0; }
+
+        [data-theme="dark"] .card-item {
+            background: var(--md-sys-color-surface-container-low);
+        }
+
+        .card-item-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            min-width: 0;
+        }
+
         .card-item-info .thumb {
-            width: 50px; height: 50px; border-radius: 0.6rem;
-            object-fit: cover; background: var(--md-sys-color-surface-container-highest);
+            width: 50px;
+            height: 50px;
+            border-radius: 0.6rem;
+            object-fit: cover;
+            background: var(--md-sys-color-surface-container-highest);
             flex-shrink: 0;
         }
-        .card-item-info .name { font-weight: 600; color: var(--md-sys-color-on-surface); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .card-item-info .meta { font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.7; }
-        .card-item-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
 
-        .empty-state { text-align: center; padding: 2rem 1rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.6; }
-        .empty-state i { font-size: 2rem; margin-bottom: 0.5rem; display: block; }
+        .card-item-info .name {
+            font-weight: 600;
+            color: var(--md-sys-color-on-surface);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-item-info .meta {
+            font-size: 0.8rem;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.7;
+        }
+
+        .card-item-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.6;
+        }
+
+        .empty-state i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
 
         .loading-spinner {
-            display: inline-block; width: 20px; height: 20px;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
             border: 2px solid var(--md-sys-color-on-primary);
-            border-top-color: transparent; border-radius: 50%;
+            border-top-color: transparent;
+            border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         .toast {
-            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-            padding: 0.8rem 1.8rem; border-radius: 2rem; font-weight: 500; z-index: 1000;
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.8rem 1.8rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            z-index: 1000;
             animation: slideUp 0.4s ease;
             background: var(--md-sys-color-surface-container);
             border: 1px solid var(--md-sys-color-outline-variant);
-            box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
             color: var(--md-sys-color-on-surface);
-            max-width: 90%; text-align: center;
+            max-width: 90%;
+            text-align: center;
         }
-        .toast.success { border-color: #23c55e; color: #23c55e; }
-        .toast.error { border-color: var(--md-sys-color-error); color: var(--md-sys-color-error); }
+
+        .toast.success {
+            border-color: #23c55e;
+            color: #23c55e;
+        }
+
+        .toast.error {
+            border-color: var(--md-sys-color-error);
+            color: var(--md-sys-color-error);
+        }
+
         @keyframes slideUp {
-            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
         }
 
         .footer-note {
-            margin-top: 2.5rem; font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant);
-            letter-spacing: 0.02em; display: flex; align-items: center; justify-content: center; gap: 8px;
-            opacity: 0.5; width: 100%;
+            margin-top: 2.5rem;
+            font-size: 0.8rem;
+            color: var(--md-sys-color-on-surface-variant);
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            opacity: 0.5;
+            width: 100%;
         }
+
         .status-badge {
-            font-size: 0.75rem; padding: 0.2rem 0.8rem; border-radius: 30px;
+            font-size: 0.75rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
             background: var(--md-sys-color-primary-container);
             color: var(--md-sys-color-on-primary-container);
-            display: inline-flex; align-items: center; gap: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        .status-badge .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-        .status-badge .dot.online { background: #23c55e; }
-        .status-badge .dot.offline { background: #ff4d6d; }
-        .allowed-formats { font-size: 0.75rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.5; margin-top: 4px; }
 
-        .key-display {
-            margin-top: 0.8rem; padding: 0.8rem 1rem;
-            border-radius: 1rem; background: var(--md-sys-color-primary-container);
-            color: var(--md-sys-color-on-primary-container);
-            font-weight: 600; text-align: center; font-size: 1.1rem;
-            letter-spacing: 2px; display: none;
+        .status-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-badge .dot.online {
+            background: #23c55e;
+        }
+
+        .status-badge .dot.offline {
+            background: #ff4d6d;
+        }
+
+        .allowed-formats {
+            font-size: 0.75rem;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.5;
+            margin-top: 4px;
         }
 
         @media (max-width: 700px) {
-            .admin-card { padding: 1.5rem 1.2rem; border-radius: 1.5rem; }
-            .form-row { grid-template-columns: 1fr; }
-            .admin-title { font-size: 1.1rem; }
-            .top-bar { padding: 0.7rem 1rem; border-radius: 1.5rem; }
-            .brand-name { font-size: 1.4rem; }
-            .card-item { flex-wrap: wrap; gap: 0.5rem; }
-            .card-item-actions { width: 100%; justify-content: flex-end; }
-            .file-input-wrapper { flex-direction: column; align-items: stretch; }
-            .file-input-label { justify-content: center; }
+            .admin-card {
+                padding: 1.5rem 1.2rem;
+                border-radius: 1.5rem;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .admin-title {
+                font-size: 1.1rem;
+            }
+            .top-bar {
+                padding: 0.7rem 1rem;
+                border-radius: 1.5rem;
+            }
+            .brand-name {
+                font-size: 1.4rem;
+            }
+            .card-item {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            .card-item-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            .file-input-wrapper {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .file-input-label {
+                justify-content: center;
+            }
         }
+
         @media (max-width: 500px) {
-            .admin-header { flex-direction: column; align-items: stretch; gap: 0.8rem; }
-            .btn-primary { justify-content: center; }
-            .card-item-info .thumb { width: 36px; height: 36px; }
+            .admin-header {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.8rem;
+            }
+            .btn-primary {
+                justify-content: center;
+            }
+            .card-item-info .thumb {
+                width: 36px;
+                height: 36px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="page-container">
+        <!-- ШАПКА -->
         <div class="top-bar">
             <div class="brand-group">
                 <div class="logo-icon"><i class="fas fa-cubes"></i></div>
@@ -369,16 +767,33 @@
 
         <!-- ДОБАВЛЕНИЕ КАРТОЧКИ -->
         <div class="admin-card">
-            <div class="admin-header"><div class="admin-title"><i class="fas fa-plus-circle"></i> Добавить карточку</div></div>
+            <div class="admin-header">
+                <div class="admin-title"><i class="fas fa-plus-circle"></i> Добавить карточку</div>
+            </div>
             <form id="addCardForm">
-                <div class="form-group"><label>Ссылка на изображение</label><input type="url" id="cardImage" placeholder="https://i.postimg.cc/..." required /></div>
-                <div class="form-row">
-                    <div class="form-group"><label>Название</label><input type="text" id="cardTitle" placeholder="Название чита" required /></div>
-                    <div class="form-group"><label>Тег</label><input type="text" id="cardTag" placeholder="TrollStore" /></div>
+                <div class="form-group">
+                    <label>Ссылка на изображение</label>
+                    <input type="url" id="cardImage" placeholder="https://i.postimg.cc/..." required />
                 </div>
                 <div class="form-row">
-                    <div class="form-group"><label>Версия</label><input type="text" id="cardVersion" placeholder="0.39.2" required /></div>
-                    <div class="form-group"><label>Требования</label><input type="text" id="cardRequirements" placeholder="TrollStore / Root" required /></div>
+                    <div class="form-group">
+                        <label>Название</label>
+                        <input type="text" id="cardTitle" placeholder="Название чита" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Тег (TrollStore / Root / и т.д.)</label>
+                        <input type="text" id="cardTag" placeholder="TrollStore" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Версия</label>
+                        <input type="text" id="cardVersion" placeholder="0.39.2" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Требования</label>
+                        <input type="text" id="cardRequirements" placeholder="TrollStore / Root" required />
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>Загрузить файл</label>
@@ -407,50 +822,6 @@
             </form>
         </div>
 
-        <!-- СОЗДАНИЕ PREMIUM КЛЮЧА -->
-        <div class="admin-card">
-            <div class="admin-header"><div class="admin-title"><i class="fas fa-key"></i> Создать Premium-ключ</div></div>
-            <form id="createKeyForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Срок действия</label>
-                        <select id="keyDuration">
-                            <option value="1">1 день</option>
-                            <option value="3">3 дня</option>
-                            <option value="7">7 дней</option>
-                            <option value="30">30 дней</option>
-                            <option value="forever" selected>Навсегда</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>&nbsp;</label>
-                        <button type="submit" class="btn-primary" id="createKeyBtn" style="width:100%; justify-content:center;">
-                            <i class="fas fa-plus"></i> Создать ключ
-                        </button>
-                    </div>
-                </div>
-                <div class="key-display" id="newKeyDisplay">
-                    <i class="fas fa-check-circle"></i> Ключ: <span id="newKeyValue"></span>
-                </div>
-            </form>
-        </div>
-
-        <!-- ДОБАВЛЕНИЕ КОНФИГА NETWING -->
-        <div class="admin-card">
-            <div class="admin-header"><div class="admin-title"><i class="fas fa-sliders-h"></i> Добавить конфиг Netwing</div></div>
-            <form id="addConfigForm">
-                <div class="form-group"><label>Название</label><input type="text" id="configTitle" placeholder="Config name" required /></div>
-                <div class="form-row">
-                    <div class="form-group"><label>Версия</label><input type="text" id="configVersion" placeholder="1.0.0" required /></div>
-                    <div class="form-group"><label>Тег</label><input type="text" id="configTag" placeholder="Aim / Visual / ..." /></div>
-                </div>
-                <div class="form-group"><label>Описание</label><textarea id="configDescription" placeholder="Описание конфига..." rows="3" required></textarea></div>
-                <div class="form-actions">
-                    <button type="submit" class="btn-primary" id="addConfigBtn"><i class="fas fa-plus"></i> Добавить конфиг</button>
-                </div>
-            </form>
-        </div>
-
         <!-- СПИСОК КАРТОЧЕК -->
         <div class="admin-card">
             <div class="admin-header">
@@ -461,14 +832,15 @@
             </div>
             <div class="cards-list" id="cardsList">
                 <div class="empty-state" id="emptyCards">
-                    <i class="fas fa-plus-circle"></i> Нет добавленных карточек
+                    <i class="fas fa-plus-circle"></i> Нет добавленных карточек<br>
+                    <span style="font-size:0.85rem;">Используйте форму выше для добавления</span>
                 </div>
             </div>
         </div>
 
         <div class="footer-note">
             <i class="fas fa-circle" style="font-size:0.35rem; opacity:0.25;"></i>
-            AdminQQQ · управление
+            AdminQQQ · управление карточками
             <i class="fas fa-circle" style="font-size:0.35rem; opacity:0.25;"></i>
         </div>
     </div>
@@ -488,6 +860,7 @@
         import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, onSnapshot } from "firebase/firestore";
         import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+        // ===== Firebase =====
         const firebaseConfig = {
             apiKey: "AIzaSyDN-yKcm_tekA-5LKhjZozPIFe5LVaoTZ0",
             authDomain: "softlistr-web.firebaseapp.com",
@@ -502,10 +875,8 @@
         const db = getFirestore(app);
         const storage = getStorage(app);
         const cardsCollection = collection(db, "cards");
-        const premiumKeysCollection = collection(db, "premiumKeys");
-        const configsCollection = collection(db, "netwingConfigs");
 
-        // DOM
+        // ===== DOM =====
         const statusDot = document.getElementById('statusDot');
         const statusText = document.getElementById('statusText');
         const cardsList = document.getElementById('cardsList');
@@ -515,7 +886,7 @@
         const submitBtn = document.getElementById('submitBtn');
         const clearAllBtn = document.getElementById('clearAllBtn');
 
-        // FILE INPUT
+        // ===== FILE INPUT =====
         const fileInput = document.getElementById('fileInput');
         const fileName = document.getElementById('fileName');
         const fileSize = document.getElementById('fileSize');
@@ -542,6 +913,7 @@
             if (!cardFileInput.value) cardFileInput.value = file.name;
         });
 
+        // ===== Статус =====
         function setStatus(online) {
             if (online) {
                 statusDot.className = 'dot online';
@@ -552,6 +924,7 @@
             }
         }
 
+        // ===== Toast =====
         function showToast(message, type = 'success') {
             const old = document.querySelector('.toast');
             if (old) old.remove();
@@ -562,6 +935,7 @@
             setTimeout(() => toast.remove(), 4000);
         }
 
+        // ===== Рендер карточек =====
         function renderCards(cards) {
             const items = cardsList.querySelectorAll('.card-item');
             items.forEach(el => el.remove());
@@ -598,16 +972,19 @@
             });
         }
 
-        // Подписка на карточки
+        // ===== Подписка на изменения =====
         const q = query(cardsCollection, orderBy('createdAt', 'desc'));
         onSnapshot(q, (snapshot) => {
             setStatus(true);
             const cards = [];
             snapshot.forEach((doc) => cards.push({ id: doc.id, ...doc.data() }));
             renderCards(cards);
-        }, (error) => { setStatus(false); showToast('Ошибка подключения к Firebase', 'error'); });
+        }, (error) => {
+            setStatus(false);
+            showToast('Ошибка подключения к Firebase', 'error');
+        });
 
-        // Добавление карточки
+        // ===== Добавление карточки =====
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             const image = document.getElementById('cardImage').value.trim();
@@ -633,9 +1010,15 @@
                     fileUrl = await getDownloadURL(storageRef);
                 }
                 await addDoc(cardsCollection, {
-                    image, title, tag: tag || '', version, requirements,
-                    file: fileUrl, fileName: fileInput.files.length > 0 ? fileInput.files[0].name : file,
-                    features, createdAt: new Date().toISOString()
+                    image,
+                    title,
+                    tag: tag || '',
+                    version,
+                    requirements,
+                    file: fileUrl,
+                    fileName: fileInput.files.length > 0 ? fileInput.files[0].name : file,
+                    features,
+                    createdAt: new Date().toISOString()
                 });
                 form.reset();
                 fileName.innerHTML = '<i class="fas fa-file"></i> Файл не выбран';
@@ -648,7 +1031,7 @@
             submitBtn.innerHTML = '<i class="fas fa-plus"></i> Добавить карточку';
         });
 
-        // Очистка всех
+        // ===== Очистка всех =====
         clearAllBtn.addEventListener('click', async function() {
             if (!confirm('Удалить все карточки?')) return;
             try {
@@ -661,74 +1044,7 @@
             }
         });
 
-        // ===== СОЗДАНИЕ PREMIUM КЛЮЧА =====
-        const createKeyForm = document.getElementById('createKeyForm');
-        const createKeyBtn = document.getElementById('createKeyBtn');
-        const newKeyDisplay = document.getElementById('newKeyDisplay');
-        const newKeyValue = document.getElementById('newKeyValue');
-
-        function generateKey() {
-            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-            let result = '';
-            for (let i = 0; i < 16; i++) {
-                if (i > 0 && i % 4 === 0) result += '-';
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
-        }
-
-        createKeyForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const duration = document.getElementById('keyDuration').value;
-            const key = generateKey();
-            createKeyBtn.disabled = true;
-            createKeyBtn.innerHTML = '<span class="loading-spinner"></span>';
-            try {
-                await addDoc(premiumKeysCollection, {
-                    key, duration, used: false, createdAt: new Date().toISOString()
-                });
-                newKeyValue.textContent = key;
-                newKeyDisplay.style.display = 'block';
-                setTimeout(() => { newKeyDisplay.style.display = 'none'; }, 10000);
-                showToast('Ключ создан!', 'success');
-            } catch (error) {
-                showToast('Ошибка при создании ключа', 'error');
-            }
-            createKeyBtn.disabled = false;
-            createKeyBtn.innerHTML = '<i class="fas fa-plus"></i> Создать ключ';
-        });
-
-        // ===== ДОБАВЛЕНИЕ КОНФИГА NETWING =====
-        const addConfigForm = document.getElementById('addConfigForm');
-        const addConfigBtn = document.getElementById('addConfigBtn');
-
-        addConfigForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const title = document.getElementById('configTitle').value.trim();
-            const version = document.getElementById('configVersion').value.trim();
-            const tag = document.getElementById('configTag').value.trim();
-            const description = document.getElementById('configDescription').value.trim();
-            if (!title || !version || !description) {
-                showToast('Заполните все обязательные поля!', 'error');
-                return;
-            }
-            addConfigBtn.disabled = true;
-            addConfigBtn.innerHTML = '<span class="loading-spinner"></span>';
-            try {
-                await addDoc(configsCollection, {
-                    title, version, tag: tag || '', description,
-                    createdAt: new Date().toISOString()
-                });
-                addConfigForm.reset();
-                showToast('Конфиг добавлен!', 'success');
-            } catch (error) {
-                showToast('Ошибка при добавлении конфига', 'error');
-            }
-            addConfigBtn.disabled = false;
-            addConfigBtn.innerHTML = '<i class="fas fa-plus"></i> Добавить конфиг';
-        });
-
-        // ===== ТЕМА =====
+        // ===== Тема =====
         const toggle = document.getElementById('themeToggle');
         const html = document.documentElement;
         const settingsIcon = document.getElementById('settingsToggle');
@@ -765,4 +1081,4 @@
         });
     </script>
 </body>
-                        </html>
+</html>
