@@ -9,12 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
@@ -26,7 +21,6 @@
       color: var(--md-sys-color-on-background);
       transition: background 0.3s ease, color 0.2s ease;
     }
-
     :root {
       --md-sys-color-primary: #1b3bff;
       --md-sys-color-on-primary: #ffffff;
@@ -65,7 +59,6 @@
       --md-sys-color-surface-container-high: #e6e5ec;
       --md-sys-color-surface-container-highest: #dad9e0;
     }
-
     [data-theme="dark"] {
       --md-sys-color-primary: #b9c3ff;
       --md-sys-color-on-primary: #1a2a8a;
@@ -104,565 +97,206 @@
       --md-sys-color-surface-container-high: #2a2a32;
       --md-sys-color-surface-container-highest: #35353d;
     }
-
-    /* ===== FIXED TOP BAR ===== */
     .top-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      width: 100%;
-      max-width: 900px;
+      position: sticky; top: 0; z-index: 100;
+      width: 100%; max-width: 900px;
       padding: 1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 0.8rem;
-      margin-bottom: 2rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      margin-top: 0.8rem; margin-bottom: 2rem;
       background: var(--md-sys-color-surface-container);
-      border-radius: 2rem;
-      border: 1px solid var(--md-sys-color-outline-variant);
+      border-radius: 2rem; border: 1px solid var(--md-sys-color-outline-variant);
       transition: background 0.3s, border 0.3s, box-shadow 0.3s;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     }
-
-    /* Тень при прокрутке (эффект "прилипания") */
-    .top-bar.scrolled {
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-    }
-
-    [data-theme="dark"] .top-bar.scrolled {
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-    }
-
-    [data-theme="dark"] .top-bar {
-      background: var(--md-sys-color-surface-container-high);
-      border-color: var(--md-sys-color-surface-variant);
-    }
-
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-    }
-
+    .top-bar.scrolled { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+    [data-theme="dark"] .top-bar.scrolled { box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+    [data-theme="dark"] .top-bar { background: var(--md-sys-color-surface-container-high); border-color: var(--md-sys-color-surface-variant); }
+    .brand-group { display: flex; align-items: center; gap: 0.8rem; }
     .logo-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--md-sys-color-primary);
-      color: var(--md-sys-color-on-primary);
+      width: 44px; height: 44px;
+      background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
       border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      transition: background 0.25s, color 0.25s, transform 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; transition: background 0.25s, color 0.25s, transform 0.2s;
       box-shadow: 0 4px 10px -4px var(--md-sys-color-primary);
       flex-shrink: 0;
     }
-
-    .brand-name {
-      font-size: 2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      color: var(--md-sys-color-on-surface);
-      transition: color 0.2s;
-    }
-
+    .brand-name { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; color: var(--md-sys-color-on-surface); transition: color 0.2s; }
     .brand-tagline {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--md-sys-color-on-surface-variant);
-      letter-spacing: 0.02em;
-      opacity: 0.7;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      font-size: 0.8rem; font-weight: 500; color: var(--md-sys-color-on-surface-variant);
+      letter-spacing: 0.02em; opacity: 0.7; display: flex; align-items: center; gap: 6px;
     }
-
-    .brand-tagline i {
-      font-size: 9px;
-      color: var(--md-sys-color-primary);
-    }
-
-    .settings-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-
+    .brand-tagline i { font-size: 9px; color: var(--md-sys-color-primary); }
+    .settings-wrapper { position: relative; display: inline-block; }
     .settings-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
+      width: 44px; height: 44px; border-radius: 50%;
       background: var(--md-sys-color-surface-container-high);
       border: 1px solid var(--md-sys-color-outline-variant);
       color: var(--md-sys-color-on-surface-variant);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; cursor: pointer;
       transition: background 0.2s, border 0.2s, transform 0.15s;
     }
-
-    .settings-icon:hover {
-      background: var(--md-sys-color-surface-container-highest);
-      border-color: var(--md-sys-color-primary);
-      transform: scale(1.04);
-    }
-
+    .settings-icon:hover { background: var(--md-sys-color-surface-container-highest); border-color: var(--md-sys-color-primary); transform: scale(1.04); }
     .settings-dropdown {
-      position: absolute;
-      top: calc(100% + 12px);
-      right: 0;
-      min-width: 210px;
+      position: absolute; top: calc(100% + 12px); right: 0; min-width: 210px;
       background: var(--md-sys-color-surface-container);
-      border-radius: 1.5rem;
-      padding: 1.2rem 1.4rem;
+      border-radius: 1.5rem; padding: 1.2rem 1.4rem;
       border: 1px solid var(--md-sys-color-outline-variant);
       box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-      opacity: 0;
-      visibility: hidden;
+      opacity: 0; visibility: hidden;
       transform: translateY(-8px) scale(0.96);
       transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
-      transform-origin: top right;
-      z-index: 10;
+      transform-origin: top right; z-index: 10;
     }
-
     [data-theme="dark"] .settings-dropdown {
       background: var(--md-sys-color-surface-container-high);
       box-shadow: 0 8px 28px rgba(0,0,0,0.5);
       border-color: var(--md-sys-color-surface-variant);
     }
-
-    .settings-dropdown.open {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0) scale(1);
-    }
-
+    .settings-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
     .dropdown-title {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--md-sys-color-on-surface-variant);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 0.8rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 0.75rem; font-weight: 600; color: var(--md-sys-color-on-surface-variant);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;
     }
-
-    .dropdown-title i {
-      color: var(--md-sys-color-primary);
-    }
-
+    .dropdown-title i { color: var(--md-sys-color-primary); }
     .theme-switch-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 0.3rem 0;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 14px; padding: 0.3rem 0;
     }
-
-    .theme-switch-row span {
-      font-weight: 500;
-      color: var(--md-sys-color-on-surface);
-    }
-
-    .theme-icons {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--md-sys-color-on-surface-variant);
-    }
-
+    .theme-switch-row span { font-weight: 500; color: var(--md-sys-color-on-surface); }
+    .theme-icons { display: flex; align-items: center; gap: 8px; color: var(--md-sys-color-on-surface-variant); }
     .switch {
-      position: relative;
-      display: inline-block;
-      width: 44px;
-      height: 24px;
-      flex-shrink: 0;
-      cursor: pointer;
+      position: relative; display: inline-block;
+      width: 44px; height: 24px; flex-shrink: 0; cursor: pointer;
     }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
+    .switch input { opacity: 0; width: 0; height: 0; }
     .slider {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
       background: var(--md-sys-color-surface-container-highest);
-      transition: 0.25s cubic-bezier(0.2, 0, 0, 1);
-      border-radius: 40px;
+      transition: 0.25s cubic-bezier(0.2, 0, 0, 1); border-radius: 40px;
       box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
     }
-
     .slider::before {
-      content: "";
-      position: absolute;
-      height: 18px;
-      width: 18px;
-      left: 3px;
-      bottom: 3px;
+      content: ""; position: absolute;
+      height: 18px; width: 18px; left: 3px; bottom: 3px;
       background: var(--md-sys-color-surface);
-      transition: 0.25s cubic-bezier(0.2, 0, 0, 1);
-      border-radius: 50%;
+      transition: 0.25s cubic-bezier(0.2, 0, 0, 1); border-radius: 50%;
       box-shadow: 0 2px 6px rgba(0,0,0,0.12);
     }
+    .switch input:checked+.slider { background: var(--md-sys-color-primary); }
+    .switch input:checked+.slider::before { transform: translateX(20px); background: var(--md-sys-color-on-primary); }
 
-    .switch input:checked+.slider {
-      background: var(--md-sys-color-primary);
+    /* Premium link in dropdown */
+    .premium-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0.6rem 0; margin-top: 0.5rem; padding-top: 0.8rem;
+      color: var(--md-sys-color-on-surface); text-decoration: none;
+      font-weight: 500; border-top: 1px solid var(--md-sys-color-outline-variant);
+      transition: color 0.2s;
     }
-
-    .switch input:checked+.slider::before {
-      transform: translateX(20px);
-      background: var(--md-sys-color-on-primary);
-    }
+    .premium-link i { color: var(--md-sys-color-primary); }
+    .premium-link:hover { color: var(--md-sys-color-primary); }
+    .premium-link.active i { color: #ffd700; }
 
     .main-content {
-      width: 100%;
-      max-width: 900px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 1rem 2rem;
-      gap: 1.5rem;
+      width: 100%; max-width: 900px; flex: 1;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 0 1rem 2rem; gap: 1.5rem;
     }
-
     .card {
-      width: 100%;
-      max-width: 420px;
+      width: 100%; max-width: 420px;
       background: var(--md-sys-color-surface-container);
-      border-radius: 2rem;
-      border: 1px solid var(--md-sys-color-outline-variant);
-      overflow: hidden;
-      transition: background 0.3s, border 0.3s, transform 0.2s, box-shadow 0.3s;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-      animation: fadeIn 0.3s ease;
+      border-radius: 2rem; border: 1px solid var(--md-sys-color-outline-variant);
+      overflow: hidden; transition: background 0.3s, border 0.3s, transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04); animation: fadeIn 0.3s ease;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    [data-theme="dark"] .card {
-      background: var(--md-sys-color-surface-container-high);
-      border-color: var(--md-sys-color-surface-variant);
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-    }
-
-    [data-theme="dark"] .card:hover {
-      box-shadow: 0 12px 32px rgba(0,0,0,0.3);
-    }
-
-    .card-image {
-      width: 100%;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-      background: var(--md-sys-color-surface-container-highest);
-    }
-
-    .card-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .card-body {
-      padding: 1.2rem 1.4rem 1.4rem;
-    }
-
-    .card-title {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--md-sys-color-on-surface);
-      margin-bottom: 0.1rem;
-    }
-
-    .card-title small {
-      font-weight: 400;
-      font-size: 0.75rem;
-      color: var(--md-sys-color-on-surface-variant);
-      opacity: 0.6;
-      margin-left: 4px;
-    }
-
-    .card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem 1rem;
-      margin: 0.5rem 0 0.8rem;
-      font-size: 0.85rem;
-      color: var(--md-sys-color-on-surface-variant);
-    }
-
-    .card-meta span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .card-meta i {
-      font-size: 0.75rem;
-      color: var(--md-sys-color-primary);
-      opacity: 0.7;
-    }
-
-    .card-divider {
-      height: 1px;
-      background: var(--md-sys-color-outline-variant);
-      margin: 0.6rem 0 0.8rem;
-    }
-
-    .card-features-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.5rem;
-    }
-
-    .card-features-title {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--md-sys-color-on-surface-variant);
-      opacity: 0.6;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    [data-theme="dark"] .card { background: var(--md-sys-color-surface-container-high); border-color: var(--md-sys-color-surface-variant); }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+    [data-theme="dark"] .card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.3); }
+    .card-image { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--md-sys-color-surface-container-highest); }
+    .card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-body { padding: 1.2rem 1.4rem 1.4rem; }
+    .card-title { font-size: 1.3rem; font-weight: 700; color: var(--md-sys-color-on-surface); margin-bottom: 0.1rem; }
+    .card-title small { font-weight: 400; font-size: 0.75rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.6; margin-left: 4px; }
+    .card-meta { display: flex; flex-wrap: wrap; gap: 0.6rem 1rem; margin: 0.5rem 0 0.8rem; font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); }
+    .card-meta span { display: flex; align-items: center; gap: 4px; }
+    .card-meta i { font-size: 0.75rem; color: var(--md-sys-color-primary); opacity: 0.7; }
+    .card-divider { height: 1px; background: var(--md-sys-color-outline-variant); margin: 0.6rem 0 0.8rem; }
+    .card-features-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+    .card-features-title { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--md-sys-color-on-surface-variant); opacity: 0.6; display: flex; align-items: center; gap: 6px; }
     .toggle-features-btn {
-      background: none;
-      border: none;
-      color: var(--md-sys-color-on-surface-variant);
-      cursor: pointer;
-      font-size: 0.85rem;
-      padding: 0.2rem 0.5rem;
-      border-radius: 30px;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      opacity: 0.6;
+      background: none; border: none; color: var(--md-sys-color-on-surface-variant);
+      cursor: pointer; font-size: 0.85rem; padding: 0.2rem 0.5rem; border-radius: 30px;
+      transition: all 0.2s ease; display: flex; align-items: center; gap: 4px; opacity: 0.6;
     }
-
-    .toggle-features-btn:hover {
-      background: var(--md-sys-color-surface-container-highest);
-      opacity: 1;
-    }
-
-    .toggle-features-btn i {
-      transition: transform 0.3s ease;
-    }
-
-    .toggle-features-btn i.rotated {
-      transform: rotate(180deg);
-    }
-
+    .toggle-features-btn:hover { background: var(--md-sys-color-surface-container-highest); opacity: 1; }
+    .toggle-features-btn i { transition: transform 0.3s ease; }
+    .toggle-features-btn i.rotated { transform: rotate(180deg); }
     .card-features-wrapper {
       overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                  opacity 0.3s ease,
-                  margin 0.3s ease;
-      max-height: 500px;
-      opacity: 1;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, margin 0.3s ease;
+      max-height: 500px; opacity: 1;
     }
-
-    .card-features-wrapper.collapsed {
-      max-height: 0;
-      opacity: 0;
-      margin: 0;
-    }
-
-    .card-features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem 0.7rem;
-      padding-top: 0.2rem;
-    }
-
-    .card-features .tag {
-      font-size: 0.75rem;
-      font-weight: 500;
-      padding: 0.2rem 0.7rem;
-      border-radius: 30px;
-      background: var(--md-sys-color-primary-container);
-      color: var(--md-sys-color-on-primary-container);
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    [data-theme="dark"] .card-features .tag {
-      background: var(--md-sys-color-primary-container);
-      color: var(--md-sys-color-on-primary-container);
-    }
-
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.8rem;
-      padding-top: 0.8rem;
-      border-top: 1px solid var(--md-sys-color-outline-variant);
-    }
-
-    .card-version {
-      font-size: 0.8rem;
-      color: var(--md-sys-color-on-surface-variant);
-      opacity: 0.6;
-    }
-
-    .card-version strong {
-      color: var(--md-sys-color-on-surface);
-      opacity: 0.9;
-    }
-
+    .card-features-wrapper.collapsed { max-height: 0; opacity: 0; margin: 0; }
+    .card-features { display: flex; flex-wrap: wrap; gap: 0.4rem 0.7rem; padding-top: 0.2rem; }
+    .card-features .tag { font-size: 0.75rem; font-weight: 500; padding: 0.2rem 0.7rem; border-radius: 30px; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); transition: background 0.2s, transform 0.2s; }
+    [data-theme="dark"] .card-features .tag { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+    .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid var(--md-sys-color-outline-variant); }
+    .card-version { font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.6; }
+    .card-version strong { color: var(--md-sys-color-on-surface); opacity: 0.9; }
     .btn-download {
-      background: var(--md-sys-color-primary);
-      color: var(--md-sys-color-on-primary);
-      border: none;
-      font-weight: 600;
-      font-size: 0.85rem;
-      padding: 0.4rem 1.4rem;
-      border-radius: 60px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
-      box-shadow: 0 4px 12px -4px var(--md-sys-color-primary);
-      text-decoration: none;
+      background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
+      border: none; font-weight: 600; font-size: 0.85rem; padding: 0.4rem 1.4rem;
+      border-radius: 60px; display: inline-flex; align-items: center; gap: 6px;
+      cursor: pointer; transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 12px -4px var(--md-sys-color-primary); text-decoration: none;
     }
-
-    .btn-download:hover {
-      filter: brightness(1.08);
-      transform: scale(1.02) translateY(-2px);
-      box-shadow: 0 8px 20px -6px var(--md-sys-color-primary);
-    }
-
-    .btn-download i {
-      font-size: 0.8rem;
-    }
+    .btn-download:hover { filter: brightness(1.08); transform: scale(1.02) translateY(-2px); box-shadow: 0 8px 20px -6px var(--md-sys-color-primary); }
+    .btn-download i { font-size: 0.8rem; }
 
     .footer-note {
-      margin-top: auto;
-      padding: 2rem 1.5rem 1.5rem;
-      font-size: 0.8rem;
-      color: var(--md-sys-color-on-surface-variant);
-      letter-spacing: 0.02em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      opacity: 0.5;
-      width: 100%;
+      margin-top: auto; padding: 2rem 1.5rem 1.5rem;
+      font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant);
+      letter-spacing: 0.02em; display: flex; align-items: center; justify-content: center; gap: 8px;
+      opacity: 0.5; width: 100%;
     }
-
-    .footer-note i {
-      font-size: 0.7rem;
-    }
+    .footer-note i { font-size: 0.7rem; }
 
     .update-badge {
-      position: fixed;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
       background: var(--md-sys-color-surface-container);
       border: 1px solid var(--md-sys-color-primary);
       color: var(--md-sys-color-on-surface);
-      padding: 0.5rem 1.5rem;
-      border-radius: 60px;
-      font-size: 0.85rem;
-      font-weight: 500;
+      padding: 0.5rem 1.5rem; border-radius: 60px;
+      font-size: 0.85rem; font-weight: 500;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      z-index: 100;
-      display: none;
-      animation: slideUp 0.4s ease;
+      z-index: 100; display: none; animation: slideUp 0.4s ease;
     }
-
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(0); }
-    }
-
-    .update-badge i {
-      margin-right: 8px;
-      color: var(--md-sys-color-primary);
-    }
+    @keyframes slideUp { from { opacity: 0; transform: translateX(-50%) translateY(20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+    .update-badge i { margin-right: 8px; color: var(--md-sys-color-primary); }
 
     @media (max-width: 700px) {
-      .top-bar {
-        padding: 0.7rem 1rem;
-        border-radius: 1.5rem;
-        margin-top: 0.5rem;
-        margin-bottom: 1.5rem;
-      }
-      .brand-name {
-        font-size: 1.5rem;
-      }
-      .logo-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 18px;
-        border-radius: 12px;
-      }
-      .brand-tagline {
-        font-size: 0.7rem;
-      }
-      .settings-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 1rem;
-      }
-      .settings-dropdown {
-        right: -6px;
-        min-width: 180px;
-        padding: 1rem 1.2rem;
-      }
-      .card {
-        max-width: 100%;
-      }
+      .top-bar { padding: 0.7rem 1rem; border-radius: 1.5rem; margin-top: 0.5rem; margin-bottom: 1.5rem; }
+      .brand-name { font-size: 1.5rem; }
+      .logo-icon { width: 38px; height: 38px; font-size: 18px; border-radius: 12px; }
+      .brand-tagline { font-size: 0.7rem; }
+      .settings-icon { width: 38px; height: 38px; font-size: 1rem; }
+      .settings-dropdown { right: -6px; min-width: 180px; padding: 1rem 1.2rem; }
+      .card { max-width: 100%; }
     }
-
     @media (max-width: 400px) {
-      .brand-name {
-        font-size: 1.2rem;
-      }
-      .brand-tagline {
-        display: none;
-      }
-      .settings-dropdown {
-        right: -10px;
-        min-width: 160px;
-        padding: 0.9rem 1rem;
-      }
-      .card-body {
-        padding: 1rem 1rem 1.2rem;
-      }
-      .card-title {
-        font-size: 1.1rem;
-      }
+      .brand-name { font-size: 1.2rem; }
+      .brand-tagline { display: none; }
+      .settings-dropdown { right: -10px; min-width: 160px; padding: 0.9rem 1rem; }
+      .card-body { padding: 1rem 1rem 1.2rem; }
+      .card-title { font-size: 1.1rem; }
     }
   </style>
 </head>
 <body>
-  <!-- ===== ФИКСИРОВАННАЯ ВЕРХНЯЯ ПАНЕЛЬ ===== -->
   <div class="top-bar" id="topBar">
     <div class="brand-group">
       <div class="logo-icon"><i class="fas fa-cubes"></i></div>
@@ -683,26 +317,25 @@
             <i class="fas fa-moon"></i>
           </div>
         </div>
+        <!-- Premium Link -->
+        <a href="PremiumKey.html" class="premium-link" id="premiumLink">
+          <i class="fas fa-crown"></i> Premium
+          <span style="margin-left:auto; font-size:0.7rem; opacity:0.5;" id="premiumStatus"></span>
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- ===== КАРТОЧКИ ===== -->
-  <div class="main-content" id="cardsContainer">
-    <!-- Сюда будут добавляться карточки -->
-  </div>
+  <div class="main-content" id="cardsContainer"></div>
 
-  <!-- Бейдж обновления -->
   <div class="update-badge" id="updateBadge">
     <i class="fas fa-sync-alt fa-spin"></i> Новые карточки загружены
   </div>
 
-  <!-- футер -->
   <div class="footer-note">
-    <i class="fas fa-circle" style="font-size: 0.35rem; opacity:0.25;"></i>
-    SoftListR · made with 
-    <i class="fas fa-heart" style="color: #ff4d6d; font-size: 0.7rem;"></i> 
-    <i class="fas fa-circle" style="font-size: 0.35rem; opacity:0.25;"></i>
+    <i class="fas fa-circle" style="font-size:0.35rem; opacity:0.25;"></i>
+    SoftListR · made with <i class="fas fa-heart" style="color:#ff4d6d; font-size:0.7rem;"></i>
+    <i class="fas fa-circle" style="font-size:0.35rem; opacity:0.25;"></i>
   </div>
 
   <script type="importmap">
@@ -733,6 +366,18 @@
     const cardsContainer = document.getElementById('cardsContainer');
     const updateBadge = document.getElementById('updateBadge');
 
+    // ===== Проверка Premium =====
+    const premiumLink = document.getElementById('premiumLink');
+    const premiumStatus = document.getElementById('premiumStatus');
+    const isPremium = localStorage.getItem('premiumActive') === 'true';
+
+    if (isPremium) {
+      premiumLink.classList.add('active');
+      premiumStatus.textContent = '✅ Активен';
+    } else {
+      premiumStatus.textContent = '';
+    }
+
     // ===== ВСТРОЕННЫЕ КАРТОЧКИ =====
     const builtinCards = [
       {
@@ -759,63 +404,33 @@
     function createCardElement(card) {
       const cardDiv = document.createElement('div');
       cardDiv.className = 'card';
-
       const featuresHtml = card.features && card.features.length > 0
         ? card.features.map(f => `<span class="tag">${f}</span>`).join('')
         : '';
-
       cardDiv.innerHTML = `
-        <div class="card-image">
-          <img src="${card.image}" alt="${card.title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22420%22 height=%22236%22 viewBox=%220 0 420 236%22%3E%3Crect width=%22420%22 height=%22236%22 fill=%22%23ddd%22/%3E%3Ctext x=%22210%22 y=%22120%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2240%22 font-family=%22sans-serif%22%3E📷%3C/text%3E%3C/svg%3E'" />
-        </div>
+        <div class="card-image"><img src="${card.image}" alt="${card.title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22420%22 height=%22236%22 viewBox=%220 0 420 236%22%3E%3Crect width=%22420%22 height=%22236%22 fill=%22%23ddd%22/%3E%3Ctext x=%22210%22 y=%22120%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2240%22 font-family=%22sans-serif%22%3E📷%3C/text%3E%3C/svg%3E'" /></div>
         <div class="card-body">
-          <div class="card-title">
-            ${card.title}
-            ${card.tag ? `<small>• ${card.tag}</small>` : ''}
-          </div>
-          <div class="card-meta">
-            <span><i class="fas fa-tag"></i> Версия: <strong>${card.version}</strong></span>
-            <span><i class="fas fa-microchip"></i> Требования: ${card.requirements}</span>
-          </div>
+          <div class="card-title">${card.title}${card.tag ? `<small>• ${card.tag}</small>` : ''}</div>
+          <div class="card-meta"><span><i class="fas fa-tag"></i> Версия: <strong>${card.version}</strong></span><span><i class="fas fa-microchip"></i> Требования: ${card.requirements}</span></div>
           <div class="card-divider"></div>
-          <div class="card-features-header">
-            <div class="card-features-title"><i class="fas fa-list-ul"></i> Функции</div>
-            <button class="toggle-features-btn">
-              <span class="toggle-label">Скрыть</span>
-              <i class="fas fa-chevron-up toggle-icon"></i>
-            </button>
-          </div>
-          <div class="card-features-wrapper">
-            <div class="card-features">${featuresHtml}</div>
-          </div>
-          <div class="card-footer">
-            <span class="card-version"><i class="fas fa-arrow-up"></i> <strong>${card.version}</strong></span>
-            <a href="${card.file}" download class="btn-download"><i class="fas fa-download"></i> Скачать</a>
-          </div>
+          <div class="card-features-header"><div class="card-features-title"><i class="fas fa-list-ul"></i> Функции</div><button class="toggle-features-btn"><span class="toggle-label">Скрыть</span><i class="fas fa-chevron-up toggle-icon"></i></button></div>
+          <div class="card-features-wrapper"><div class="card-features">${featuresHtml}</div></div>
+          <div class="card-footer"><span class="card-version"><i class="fas fa-arrow-up"></i> <strong>${card.version}</strong></span><a href="${card.file}" download class="btn-download"><i class="fas fa-download"></i> Скачать</a></div>
         </div>
       `;
-
       return cardDiv;
     }
 
-    // ===== Показываем встроенные карточки =====
-    builtinCards.forEach(card => {
-      cardsContainer.appendChild(createCardElement(card));
-    });
+    builtinCards.forEach(card => cardsContainer.appendChild(createCardElement(card)));
 
-    // ===== Загрузка из Firebase =====
+    // ===== Firebase =====
     const q = query(collection(db, "cards"), orderBy("createdAt", "desc"));
     let isFirstLoad = true;
 
     onSnapshot(q, (snapshot) => {
       const oldFirebase = cardsContainer.querySelectorAll('.firebase-card');
       oldFirebase.forEach(el => el.remove());
-
-      if (snapshot.empty) {
-        isFirstLoad = false;
-        return;
-      }
-
+      if (snapshot.empty) { isFirstLoad = false; return; }
       let addedCount = 0;
       snapshot.forEach((doc) => {
         const card = { id: doc.id, ...doc.data() };
@@ -824,36 +439,24 @@
         cardsContainer.appendChild(el);
         addedCount++;
       });
-
       if (!isFirstLoad && addedCount > 0) {
         updateBadge.style.display = 'block';
-        setTimeout(() => {
-          updateBadge.style.display = 'none';
-        }, 2000);
+        setTimeout(() => { updateBadge.style.display = 'none'; }, 2000);
       }
-
       isFirstLoad = false;
+    }, (error) => { console.error('Firebase ошибка:', error); });
 
-    }, (error) => {
-      console.error('Firebase ошибка:', error);
-    });
-
-    // ===== ТОГГЛ ФУНКЦИЙ (для всех карточек) =====
+    // ===== Тоггл функций =====
     cardsContainer.addEventListener('click', function(e) {
       const btn = e.target.closest('.toggle-features-btn');
       if (!btn) return;
-
       const cardBody = btn.closest('.card-body');
       if (!cardBody) return;
-
       const wrapper = cardBody.querySelector('.card-features-wrapper');
       const label = btn.querySelector('.toggle-label');
       const icon = btn.querySelector('.toggle-icon');
-
       if (!wrapper) return;
-
       const isCollapsed = wrapper.classList.contains('collapsed');
-
       if (isCollapsed) {
         wrapper.classList.remove('collapsed');
         if (label) label.textContent = 'Скрыть';
@@ -865,17 +468,13 @@
       }
     });
 
-    // ===== Тень при прокрутке (эффект для sticky) =====
+    // ===== Тень при прокрутке =====
     const topBar = document.getElementById('topBar');
     window.addEventListener('scroll', function() {
-      if (window.scrollY > 10) {
-        topBar.classList.add('scrolled');
-      } else {
-        topBar.classList.remove('scrolled');
-      }
+      topBar.classList.toggle('scrolled', window.scrollY > 10);
     });
 
-    // ===== тема =====
+    // ===== Тема =====
     const toggle = document.getElementById('themeToggle');
     const html = document.documentElement;
     const settingsIcon = document.getElementById('settingsToggle');
@@ -918,4 +517,4 @@
     });
   </script>
 </body>
-</html>
+  </html>
