@@ -901,7 +901,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const storage = getStorage(app);
-        const cardsCollection = collection(db, "Cards");
+        const cardsCollection = collection(db, "cards");
 
         // ===== DOM =====
         const statusDot = document.getElementById('statusDot');
