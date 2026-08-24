@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Premium · SoftListR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-background);
+            transition: background 0.3s ease, color 0.2s ease;
+            padding: 1.5rem;
+        }
+        :root {
+            --md-sys-color-primary: #1b3bff;
+            --md-sys-color-on-primary: #ffffff;
+            --md-sys-color-primary-container: #dde0ff;
+            --md-sys-color-on-primary-container: #0a1a6e;
+            --md-sys-color-secondary: #5a5f7a;
+            --md-sys-color-on-secondary: #ffffff;
+            --md-sys-color-secondary-container: #dfe2f9;
+            --md-sys-color-on-secondary-container: #171b33;
+            --md-sys-color-tertiary: #7a5260;
+            --md-sys-color-on-tertiary: #ffffff;
+            --md-sys-color-tertiary-container: #ffd9e3;
+            --md-sys-color-on-tertiary-container: #30111d;
+            --md-sys-color-error: #ba1a1a;
+            --md-sys-color-on-error: #ffffff;
+            --md-sys-color-error-container: #ffdad6;
+            --md-sys-color-on-error-container: #410002;
+            --md-sys-color-background: #fbf8ff;
+            --md-sys-color-on-background: #1b1b21;
+            --md-sys-color-surface: #fbf8ff;
+            --md-sys-color-on-surface: #1b1b21;
+            --md-sys-color-surface-variant: #e2e1ec;
+            --md-sys-color-on-surface-variant: #45464f;
+            --md-sys-color-outline: #767680;
+            --md-sys-color-outline-variant: #c5c6d0;
+            --md-sys-color-shadow: #000000;
+            --md-sys-color-scrim: #000000;
+            --md-sys-color-inverse-surface: #303036;
+            --md-sys-color-inverse-on-surface: #f2f0f7;
+            --md-sys-color-inverse-primary: #b9c3ff;
+            --md-sys-color-surface-dim: #d9d8df;
+            --md-sys-color-surface-bright: #fbf8ff;
+            --md-sys-color-surface-container-lowest: #ffffff;
+            --md-sys-color-surface-container-low: #f2f0f7;
+            --md-sys-color-surface-container: #edebf2;
+            --md-sys-color-surface-container-high: #e6e5ec;
+            --md-sys-color-surface-container-highest: #dad9e0;
+        }
+        [data-theme="dark"] {
+            --md-sys-color-primary: #b9c3ff;
+            --md-sys-color-on-primary: #1a2a8a;
+            --md-sys-color-primary-container: #0f2b9e;
+            --md-sys-color-on-primary-container: #dde0ff;
+            --md-sys-color-secondary: #c3c6e0;
+            --md-sys-color-on-secondary: #2d3049;
+            --md-sys-color-secondary-container: #43475f;
+            --md-sys-color-on-secondary-container: #dfe2f9;
+            --md-sys-color-tertiary: #ebb0c2;
+            --md-sys-color-on-tertiary: #4b2533;
+            --md-sys-color-tertiary-container: #603b49;
+            --md-sys-color-on-tertiary-container: #ffd9e3;
+            --md-sys-color-error: #ffb4ab;
+            --md-sys-color-on-error: #690005;
+            --md-sys-color-error-container: #93000a;
+            --md-sys-color-on-error-container: #ffdad6;
+            --md-sys-color-background: #13131a;
+            --md-sys-color-on-background: #e5e2ec;
+            --md-sys-color-surface: #13131a;
+            --md-sys-color-on-surface: #e5e2ec;
+            --md-sys-color-surface-variant: #45464f;
+            --md-sys-color-on-surface-variant: #c5c6d0;
+            --md-sys-color-outline: #8f909b;
+            --md-sys-color-outline-variant: #45464f;
+            --md-sys-color-shadow: #000000;
+            --md-sys-color-scrim: #000000;
+            --md-sys-color-inverse-surface: #e5e2ec;
+            --md-sys-color-inverse-on-surface: #13131a;
+            --md-sys-color-inverse-primary: #1b3bff;
+            --md-sys-color-surface-dim: #13131a;
+            --md-sys-color-surface-bright: #393941;
+            --md-sys-color-surface-container-lowest: #0e0e14;
+            --md-sys-color-surface-container-low: #1b1b22;
+            --md-sys-color-surface-container: #1f1f26;
+            --md-sys-color-surface-container-high: #2a2a32;
+            --md-sys-color-surface-container-highest: #35353d;
+        }
+        .container {
+            max-width: 420px; width: 100%;
+            background: var(--md-sys-color-surface-container);
+            border-radius: 2.5rem; padding: 2.5rem 2rem;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            text-align: center;
+            transition: background 0.3s, border 0.3s;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+        }
+        [data-theme="dark"] .container {
+            background: var(--md-sys-color-surface-container-high);
+            border-color: var(--md-sys-color-surface-variant);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+        .icon { font-size: 3.5rem; color: var(--md-sys-color-primary); margin-bottom: 0.5rem; }
+        h1 { font-size: 1.8rem; font-weight: 700; color: var(--md-sys-color-on-surface); margin-bottom: 0.3rem; }
+        .sub { color: var(--md-sys-color-on-surface-variant); font-size: 0.95rem; opacity: 0.7; margin-bottom: 1.8rem; }
+        .input-group { margin-bottom: 1.2rem; }
+        .input-group input {
+            width: 100%; padding: 0.9rem 1.2rem; border-radius: 1.5rem;
+            border: 2px solid var(--md-sys-color-outline-variant);
+            background: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            font-size: 1rem; font-family: 'Inter', sans-serif;
+            text-align: center; letter-spacing: 2px;
+            transition: border 0.2s, background 0.3s;
+        }
+        [data-theme="dark"] .input-group input { background: var(--md-sys-color-surface-container-low); }
+        .input-group input:focus { outline: none; border-color: var(--md-sys-color-primary); }
+        .btn-primary {
+            width: 100%; background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
+            border: none; font-weight: 600; font-size: 1rem; padding: 0.9rem;
+            border-radius: 60px; cursor: pointer;
+            transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+            box-shadow: 0 4px 14px -4px var(--md-sys-color-primary);
+        }
+        .btn-primary:hover { filter: brightness(1.08); transform: scale(1.02) translateY(-2px); box-shadow: 0 8px 24px -6px var(--md-sys-color-primary); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+        .btn-secondary {
+            width: 100%; background: var(--md-sys-color-surface-container-highest);
+            color: var(--md-sys-color-on-surface);
+            border: 1px solid var(--md-sys-color-outline-variant);
+            font-weight: 500; font-size: 0.95rem; padding: 0.8rem;
+            border-radius: 60px; cursor: pointer; margin-top: 0.6rem;
+            transition: background 0.2s, border 0.2s; text-decoration: none; display: inline-block;
+        }
+        .btn-secondary:hover { background: var(--md-sys-color-surface-container-highest); border-color: var(--md-sys-color-primary); }
+        .message { margin-top: 1rem; padding: 0.6rem 1rem; border-radius: 1rem; font-size: 0.9rem; display: none; }
+        .message.success { display: block; background: #23c55e20; color: #23c55e; border: 1px solid #23c55e40; }
+        .message.error { display: block; background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); border: 1px solid var(--md-sys-color-error); }
+        .message.info { display: block; background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); border: 1px solid var(--md-sys-color-primary); }
+        .loading-spinner {
+            display: inline-block; width: 20px; height: 20px;
+            border: 2px solid var(--md-sys-color-on-primary);
+            border-top-color: transparent; border-radius: 50%;
+            animation: spin 0.8s linear infinite; vertical-align: middle; margin-right: 8px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .back-link { display: inline-block; margin-top: 1rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.5; font-size: 0.85rem; text-decoration: none; transition: opacity 0.2s; }
+        .back-link:hover { opacity: 1; }
+        @media (max-width: 500px) {
+            .container { padding: 2rem 1.2rem; border-radius: 2rem; }
+            h1 { font-size: 1.5rem; }
+            .icon { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon"><i class="fas fa-crown"></i></div>
+        <h1>Premium</h1>
+        <p class="sub">Введите ключ для активации премиум-доступа</p>
+        <div class="input-group">
+            <input type="text" id="keyInput" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" autocomplete="off" />
+        </div>
+        <button class="btn-primary" id="activateBtn"><i class="fas fa-unlock"></i> Активировать</button>
+        <a href="index.html" class="btn-secondary"><i class="fas fa-arrow-left"></i> На главную</a>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "firebase/app": "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js",
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "firebase/app";
+        import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDN-yKcm_tekA-5LKhjZozPIFe5LVaoTZ0",
+            authDomain: "softlistr-web.firebaseapp.com",
+            projectId: "softlistr-web",
+            storageBucket: "softlistr-web.firebasestorage.app",
+            messagingSenderId: "335161812376",
+            appId: "1:335161812376:web:895d66f8cab3168cf537ed",
+            measurementId: "G-JCF7MBKHF4"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const keyInput = document.getElementById('keyInput');
+        const activateBtn = document.getElementById('activateBtn');
+        const message = document.getElementById('message');
+
+        // Авто-форматирование
+        keyInput.addEventListener('input', function() {
+            let value = this.value.replace(/\s/g, '').replace(/-/g, '').toUpperCase();
+            if (value.length > 16) value = value.slice(0, 16);
+            let formatted = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) formatted += '-';
+                formatted += value[i];
+            }
+            this.value = formatted;
+        });
+
+        activateBtn.addEventListener('click', async function() {
+            const key = keyInput.value.trim();
+            if (!key) { showMessage('Введите ключ!', 'error'); return; }
+            activateBtn.disabled = true;
+            activateBtn.innerHTML = '<span class="loading-spinner"></span> Проверка...';
+            try {
+                const q = query(collection(db, "premiumKeys"), where("key", "==", key), where("used", "==", false));
+                const snapshot = await getDocs(q);
+                if (snapshot.empty) {
+                    showMessage('❌ Неверный или уже использованный ключ!', 'error');
+                    activateBtn.disabled = false;
+                    activateBtn.innerHTML = '<i class="fas fa-unlock"></i> Активировать';
+                    return;
+                }
+                const doc = snapshot.docs[0];
+                const keyData = doc.data();
+                localStorage.setItem('premiumKey', key);
+                localStorage.setItem('premiumActive', 'true');
+                localStorage.setItem('premiumDuration', keyData.duration || 'forever');
+                localStorage.setItem('premiumActivatedAt', new Date().toISOString());
+                showMessage('✅ Premium активирован! Перенаправление...', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+            } catch (error) {
+                showMessage('❌ Ошибка при проверке ключа', 'error');
+                activateBtn.disabled = false;
+                activateBtn.innerHTML = '<i class="fas fa-unlock"></i> Активировать';
+            }
+        });
+
+        function showMessage(text, type) {
+            message.textContent = text;
+            message.className = `message ${type}`;
+        }
+
+        if (localStorage.getItem('premiumActive') === 'true') {
+            showMessage('✅ У вас уже есть Premium!', 'info');
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        document.documentElement.setAttribute('data-theme', savedTheme === 'dark' ? 'dark' : 'light');
+    </script>
+</body>
+</html>
