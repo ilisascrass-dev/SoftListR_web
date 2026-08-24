@@ -105,10 +105,14 @@
       --md-sys-color-surface-container-highest: #35353d;
     }
 
+    /* ===== FIXED TOP BAR ===== */
     .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       width: 100%;
       max-width: 900px;
-      padding: 1.2rem 1.5rem;
+      padding: 1rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -118,7 +122,18 @@
       background: var(--md-sys-color-surface-container);
       border-radius: 2rem;
       border: 1px solid var(--md-sys-color-outline-variant);
-      transition: background 0.3s, border 0.3s;
+      transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* Тень при прокрутке (эффект "прилипания") */
+    .top-bar.scrolled {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    [data-theme="dark"] .top-bar.scrolled {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
 
     [data-theme="dark"] .top-bar {
@@ -593,7 +608,7 @@
 
     @media (max-width: 700px) {
       .top-bar {
-        padding: 0.9rem 1rem;
+        padding: 0.7rem 1rem;
         border-radius: 1.5rem;
         margin-top: 0.5rem;
         margin-bottom: 1.5rem;
@@ -647,8 +662,8 @@
   </style>
 </head>
 <body>
-  <!-- верхняя панель -->
-  <div class="top-bar">
+  <!-- ===== ФИКСИРОВАННАЯ ВЕРХНЯЯ ПАНЕЛЬ ===== -->
+  <div class="top-bar" id="topBar">
     <div class="brand-group">
       <div class="logo-icon"><i class="fas fa-cubes"></i></div>
       <div>
@@ -718,7 +733,7 @@
     const cardsContainer = document.getElementById('cardsContainer');
     const updateBadge = document.getElementById('updateBadge');
 
-    // ===== ВСТРОЕННЫЕ КАРТОЧКИ (запасной вариант) =====
+    // ===== ВСТРОЕННЫЕ КАРТОЧКИ =====
     const builtinCards = [
       {
         title: "Чит на Standoff 2 iOS",
@@ -783,17 +798,16 @@
       return cardDiv;
     }
 
-    // ===== Показываем встроенные карточки (мгновенно) =====
+    // ===== Показываем встроенные карточки =====
     builtinCards.forEach(card => {
       cardsContainer.appendChild(createCardElement(card));
     });
 
-    // ===== Загрузка из Firebase (в фоне) =====
+    // ===== Загрузка из Firebase =====
     const q = query(collection(db, "cards"), orderBy("createdAt", "desc"));
     let isFirstLoad = true;
 
     onSnapshot(q, (snapshot) => {
-      // Удаляем старые Firebase карточки
       const oldFirebase = cardsContainer.querySelectorAll('.firebase-card');
       oldFirebase.forEach(el => el.remove());
 
@@ -802,18 +816,15 @@
         return;
       }
 
-      // Добавляем карточки из Firebase (без разделителя)
       let addedCount = 0;
       snapshot.forEach((doc) => {
         const card = { id: doc.id, ...doc.data() };
         const el = createCardElement(card);
-        // Добавляем класс для стилизации (опционально)
         el.classList.add('firebase-card');
         cardsContainer.appendChild(el);
         addedCount++;
       });
 
-      // Показываем бейдж, если это не первая загрузка
       if (!isFirstLoad && addedCount > 0) {
         updateBadge.style.display = 'block';
         setTimeout(() => {
@@ -827,7 +838,7 @@
       console.error('Firebase ошибка:', error);
     });
 
-    // ===== ТОГГЛ ФУНКЦИЙ (работает для всех карточек) =====
+    // ===== ТОГГЛ ФУНКЦИЙ (для всех карточек) =====
     cardsContainer.addEventListener('click', function(e) {
       const btn = e.target.closest('.toggle-features-btn');
       if (!btn) return;
@@ -851,6 +862,16 @@
         wrapper.classList.add('collapsed');
         if (label) label.textContent = 'Показать';
         if (icon) icon.classList.add('rotated');
+      }
+    });
+
+    // ===== Тень при прокрутке (эффект для sticky) =====
+    const topBar = document.getElementById('topBar');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 10) {
+        topBar.classList.add('scrolled');
+      } else {
+        topBar.classList.remove('scrolled');
       }
     });
 
