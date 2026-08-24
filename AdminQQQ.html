@@ -383,7 +383,6 @@
             min-height: 60px;
         }
 
-        /* File input */
         .file-input-wrapper {
             display: flex;
             align-items: center;
@@ -805,7 +804,6 @@
                     </div>
                 </div>
 
-                <!-- ЗАГРУЗКА ФАЙЛА -->
                 <div class="form-group">
                     <label>Загрузить файл</label>
                     <div class="file-input-wrapper">
@@ -901,7 +899,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const storage = getStorage(app);
-        const cardsCollection = collection(db, "cards");
+        const cardsCollection = collection(db, "cards"); // ← маленькими буквами!
 
         // ===== DOM =====
         const statusDot = document.getElementById('statusDot');
@@ -929,7 +927,6 @@
                 return;
             }
 
-            // Проверка расширения
             const allowed = ['.apk', '.zip', '.ipa', '.tipa', '.sh'];
             const ext = '.' + file.name.split('.').pop().toLowerCase();
             if (!allowed.includes(ext)) {
@@ -944,7 +941,6 @@
             fileSize.textContent = `(${(file.size / 1024 / 1024).toFixed(2)} MB)`;
             uploadedFileName = file.name;
 
-            // Автозаполнение названия файла
             if (!cardFileInput.value) {
                 cardFileInput.value = file.name;
             }
@@ -976,7 +972,7 @@
             }, 4000);
         }
 
-        // ===== Рендер карточек =====
+        // ===== Рендер карточек с кнопкой удаления =====
         function renderCards(cards) {
             const items = cardsList.querySelectorAll('.card-item');
             items.forEach(el => el.remove());
@@ -989,7 +985,7 @@
             emptyCards.style.display = 'none';
             cardCount.textContent = `(${cards.length})`;
 
-            cards.forEach((card, index) => {
+            cards.forEach((card) => {
                 const div = document.createElement('div');
                 div.className = 'card-item';
                 div.innerHTML = `
@@ -1001,23 +997,26 @@
                         </div>
                     </div>
                     <div class="card-item-actions">
-                        <button class="btn-danger" data-id="${card.id}">
+                        <button class="btn-danger delete-btn" data-id="${card.id}">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </div>
                 `;
                 cardsList.appendChild(div);
 
-                div.querySelector('.btn-danger').addEventListener('click', async function() {
+                // Удаление через Firebase
+                const deleteBtn = div.querySelector('.delete-btn');
+                deleteBtn.addEventListener('click', async function() {
                     const id = this.dataset.id;
-                    if (confirm('Удалить карточку "' + card.title + '"?')) {
-                        try {
-                            await deleteDoc(doc(db, "Cards", id));
-                            showToast('Карточка удалена', 'success');
-                        } catch (error) {
-                            console.error('Ошибка удаления:', error);
-                            showToast('Ошибка при удалении', 'error');
-                        }
+                    if (!id) return;
+                    if (!confirm('Удалить карточку "' + card.title + '"?')) return;
+
+                    try {
+                        await deleteDoc(doc(db, "cards", id));
+                        showToast('Карточка удалена!', 'success');
+                    } catch (error) {
+                        console.error('Ошибка удаления:', error);
+                        showToast('Ошибка при удалении', 'error');
                     }
                 });
             });
@@ -1064,7 +1063,6 @@
             try {
                 let fileUrl = file;
 
-                // Если выбран файл — загружаем в Storage
                 if (fileInput.files.length > 0) {
                     const selectedFile = fileInput.files[0];
                     const storageRef = ref(storage, `files/${Date.now()}_${selectedFile.name}`);
@@ -1157,4 +1155,4 @@
         });
     </script>
 </body>
-</html>
+    </html>
