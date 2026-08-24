@@ -545,17 +545,6 @@
       font-size: 0.8rem;
     }
 
-    /* Стиль для карточек из Firebase (добавляются снизу) */
-    .card.firebase-card {
-      border-color: var(--md-sys-color-primary);
-      border-width: 2px;
-    }
-
-    .card.firebase-card .card-title small {
-      color: var(--md-sys-color-primary);
-      opacity: 1;
-    }
-
     .footer-note {
       margin-top: auto;
       padding: 2rem 1.5rem 1.5rem;
@@ -600,26 +589,6 @@
     .update-badge i {
       margin-right: 8px;
       color: var(--md-sys-color-primary);
-    }
-
-    .fb-divider {
-      width: 100%;
-      max-width: 420px;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: var(--md-sys-color-on-surface-variant);
-      opacity: 0.4;
-      font-size: 0.75rem;
-      margin: 0.5rem 0;
-    }
-
-    .fb-divider::before,
-    .fb-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--md-sys-color-outline-variant);
     }
 
     @media (max-width: 700px) {
@@ -678,37 +647,24 @@
   </style>
 </head>
 <body>
-  <!-- верхняя панель с SoftListR -->
+  <!-- верхняя панель -->
   <div class="top-bar">
     <div class="brand-group">
-      <div class="logo-icon">
-        <i class="fas fa-cubes"></i>
-      </div>
+      <div class="logo-icon"><i class="fas fa-cubes"></i></div>
       <div>
         <span class="brand-name">SoftListR</span>
-        <span class="brand-tagline">
-          <i class="fas fa-chevron-right"></i> smart catalog
-        </span>
+        <span class="brand-tagline"><i class="fas fa-chevron-right"></i> smart catalog</span>
       </div>
     </div>
-
     <div class="settings-wrapper">
-      <div class="settings-icon" id="settingsToggle" aria-label="Настройки">
-        <i class="fas fa-sliders-h"></i>
-      </div>
-
+      <div class="settings-icon" id="settingsToggle"><i class="fas fa-sliders-h"></i></div>
       <div class="settings-dropdown" id="settingsDropdown">
-        <div class="dropdown-title">
-          <i class="fas fa-palette"></i> Тема оформления
-        </div>
+        <div class="dropdown-title"><i class="fas fa-palette"></i> Тема оформления</div>
         <div class="theme-switch-row">
           <span>Тёмная</span>
           <div class="theme-icons">
             <i class="fas fa-sun"></i>
-            <label class="switch">
-              <input type="checkbox" id="themeToggle" />
-              <span class="slider"></span>
-            </label>
+            <label class="switch"><input type="checkbox" id="themeToggle" /><span class="slider"></span></label>
             <i class="fas fa-moon"></i>
           </div>
         </div>
@@ -718,121 +674,12 @@
 
   <!-- ===== КАРТОЧКИ ===== -->
   <div class="main-content" id="cardsContainer">
-
-    <!-- ===== ВСТРОЕННЫЕ КАРТОЧКИ (мгновенно) ===== -->
-
-    <!-- КАРТОЧКА 1: Чит на Standoff 2 iOS (TrollStore) -->
-    <div class="card" data-id="builtin-1">
-      <div class="card-image">
-        <img src="https://i.postimg.cc/PxX2ks7h/IMG-20260824-145617-186.jpg" alt="Чит на Standoff 2 iOS" loading="lazy" />
-      </div>
-      <div class="card-body">
-        <div class="card-title">
-          Чит на Standoff 2 iOS
-          <small>• TrollStore</small>
-        </div>
-
-        <div class="card-meta">
-          <span><i class="fas fa-tag"></i> Версия: <strong>0.39.2</strong></span>
-          <span><i class="fas fa-microchip"></i> Требования: TrollStore</span>
-        </div>
-
-        <div class="card-divider"></div>
-
-        <div class="card-features-header">
-          <div class="card-features-title">
-            <i class="fas fa-list-ul"></i> Функции
-          </div>
-          <button class="toggle-features-btn">
-            <span class="toggle-label">Скрыть</span>
-            <i class="fas fa-chevron-up toggle-icon"></i>
-          </button>
-        </div>
-
-        <div class="card-features-wrapper">
-          <div class="card-features">
-            <span class="tag">Esp</span>
-            <span class="tag">AimBot</span>
-            <span class="tag">SlientAim</span>
-            <span class="tag">TriggerBot</span>
-            <span class="tag">Hit Maker</span>
-            <span class="tag">Kill Sound</span>
-            <span class="tag">HitInfo</span>
-            <span class="tag">Hit Vignette</span>
-            <span class="tag">Hit Particles</span>
-            <span class="tag">Kill Explosion</span>
-            <span class="tag">Config</span>
-          </div>
-        </div>
-
-        <div class="card-footer">
-          <span class="card-version">
-            <i class="fas fa-arrow-up"></i> <strong>0.39.2</strong>
-          </span>
-          <a href="LitvinTap.tipa" download class="btn-download">
-            <i class="fas fa-download"></i> Скачать
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- КАРТОЧКА 2: Esp (Root) -->
-    <div class="card" data-id="builtin-2">
-      <div class="card-image">
-        <img src="https://i.postimg.cc/NGzFT8BV/Yi-VOe7CShc-YLx-GPPEfn9Ig.jpg" alt="Esp" loading="lazy" />
-      </div>
-      <div class="card-body">
-        <div class="card-title">
-          Esp
-          <small>• Root</small>
-        </div>
-
-        <div class="card-meta">
-          <span><i class="fas fa-tag"></i> Версия: <strong>0.39.2</strong></span>
-          <span><i class="fas fa-microchip"></i> Требования: Root</span>
-        </div>
-
-        <div class="card-divider"></div>
-
-        <div class="card-features-header">
-          <div class="card-features-title">
-            <i class="fas fa-list-ul"></i> Функции
-          </div>
-          <button class="toggle-features-btn">
-            <span class="toggle-label">Скрыть</span>
-            <i class="fas fa-chevron-up toggle-icon"></i>
-          </button>
-        </div>
-
-        <div class="card-features-wrapper">
-          <div class="card-features">
-            <span class="tag">Esp</span>
-            <span class="tag">Esp Box</span>
-          </div>
-        </div>
-
-        <div class="card-footer">
-          <span class="card-version">
-            <i class="fas fa-arrow-up"></i> <strong>0.39.2</strong>
-          </span>
-          <a href="12000000dollarov.sh" download class="btn-download">
-            <i class="fas fa-download"></i> Скачать
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== РАЗДЕЛИТЕЛЬ (для карточек из Firebase) ===== -->
-    <div class="fb-divider" id="fbDivider" style="display:none;">
-      <span><i class="fas fa-cloud"></i> Из облака</span>
-    </div>
-
+    <!-- Сюда будут добавляться карточки -->
   </div>
 
   <!-- Бейдж обновления -->
   <div class="update-badge" id="updateBadge">
-    <i class="fas fa-sync-alt fa-spin"></i>
-    Новые карточки загружены
+    <i class="fas fa-sync-alt fa-spin"></i> Новые карточки загружены
   </div>
 
   <!-- футер -->
@@ -856,7 +703,6 @@
     import { initializeApp } from "firebase/app";
     import { getFirestore, collection, query, orderBy, onSnapshot } from "firebase/firestore";
 
-    // ===== Firebase =====
     const firebaseConfig = {
       apiKey: "AIzaSyDN-yKcm_tekA-5LKhjZozPIFe5LVaoTZ0",
       authDomain: "softlistr-web.firebaseapp.com",
@@ -870,14 +716,34 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const cardsContainer = document.getElementById('cardsContainer');
-    const fbDivider = document.getElementById('fbDivider');
     const updateBadge = document.getElementById('updateBadge');
 
-    // ===== Создание карточки =====
+    // ===== ВСТРОЕННЫЕ КАРТОЧКИ (запасной вариант) =====
+    const builtinCards = [
+      {
+        title: "Чит на Standoff 2 iOS",
+        tag: "TrollStore",
+        image: "https://i.postimg.cc/PxX2ks7h/IMG-20260824-145617-186.jpg",
+        version: "0.39.2",
+        requirements: "TrollStore",
+        file: "LitvinTap.tipa",
+        features: ["Esp", "AimBot", "SlientAim", "TriggerBot", "Hit Maker", "Kill Sound", "HitInfo", "Hit Vignette", "Hit Particles", "Kill Explosion", "Config"]
+      },
+      {
+        title: "Esp",
+        tag: "Root",
+        image: "https://i.postimg.cc/NGzFT8BV/Yi-VOe7CShc-YLx-GPPEfn9Ig.jpg",
+        version: "0.39.2",
+        requirements: "Root",
+        file: "12000000dollarov.sh",
+        features: ["Esp", "Esp Box"]
+      }
+    ];
+
+    // ===== Функция создания карточки =====
     function createCardElement(card) {
       const cardDiv = document.createElement('div');
-      cardDiv.className = 'card firebase-card';
-      cardDiv.dataset.id = card.id || 'fb-' + Date.now();
+      cardDiv.className = 'card';
 
       const featuresHtml = card.features && card.features.length > 0
         ? card.features.map(f => `<span class="tag">${f}</span>`).join('')
@@ -892,132 +758,100 @@
             ${card.title}
             ${card.tag ? `<small>• ${card.tag}</small>` : ''}
           </div>
-
           <div class="card-meta">
             <span><i class="fas fa-tag"></i> Версия: <strong>${card.version}</strong></span>
             <span><i class="fas fa-microchip"></i> Требования: ${card.requirements}</span>
           </div>
-
           <div class="card-divider"></div>
-
           <div class="card-features-header">
-            <div class="card-features-title">
-              <i class="fas fa-list-ul"></i> Функции
-            </div>
+            <div class="card-features-title"><i class="fas fa-list-ul"></i> Функции</div>
             <button class="toggle-features-btn">
               <span class="toggle-label">Скрыть</span>
               <i class="fas fa-chevron-up toggle-icon"></i>
             </button>
           </div>
-
           <div class="card-features-wrapper">
-            <div class="card-features">
-              ${featuresHtml}
-            </div>
+            <div class="card-features">${featuresHtml}</div>
           </div>
-
           <div class="card-footer">
-            <span class="card-version">
-              <i class="fas fa-arrow-up"></i> <strong>${card.version}</strong>
-            </span>
-            <a href="${card.file}" download class="btn-download">
-              <i class="fas fa-download"></i> Скачать
-            </a>
+            <span class="card-version"><i class="fas fa-arrow-up"></i> <strong>${card.version}</strong></span>
+            <a href="${card.file}" download class="btn-download"><i class="fas fa-download"></i> Скачать</a>
           </div>
         </div>
       `;
 
-      // Тоггл функций
-      const toggleBtn = cardDiv.querySelector('.toggle-features-btn');
-      const wrapper = cardDiv.querySelector('.card-features-wrapper');
-      const label = toggleBtn.querySelector('.toggle-label');
-      const icon = toggleBtn.querySelector('.toggle-icon');
-
-      toggleBtn.addEventListener('click', function() {
-        const isCollapsed = wrapper.classList.contains('collapsed');
-        if (isCollapsed) {
-          wrapper.classList.remove('collapsed');
-          label.textContent = 'Скрыть';
-          icon.classList.remove('rotated');
-        } else {
-          wrapper.classList.add('collapsed');
-          label.textContent = 'Показать';
-          icon.classList.add('rotated');
-        }
-      });
-
       return cardDiv;
     }
 
-    // ===== Проверка, есть ли уже такая карточка =====
-    function isCardExists(card) {
-      const existing = cardsContainer.querySelectorAll('.card');
-      for (const el of existing) {
-        // Проверяем по названию + версии (упрощённо)
-        const title = el.querySelector('.card-title')?.textContent?.trim() || '';
-        const version = el.querySelector('.card-version strong')?.textContent || '';
-        if (title.includes(card.title) && version === card.version) {
-          return true;
-        }
-      }
-      return false;
-    }
+    // ===== Показываем встроенные карточки (мгновенно) =====
+    builtinCards.forEach(card => {
+      cardsContainer.appendChild(createCardElement(card));
+    });
 
     // ===== Загрузка из Firebase (в фоне) =====
     const q = query(collection(db, "cards"), orderBy("createdAt", "desc"));
-
-    let isFirstFirebaseLoad = true;
-    let firebaseCardsLoaded = 0;
+    let isFirstLoad = true;
 
     onSnapshot(q, (snapshot) => {
+      // Удаляем старые Firebase карточки
+      const oldFirebase = cardsContainer.querySelectorAll('.firebase-card');
+      oldFirebase.forEach(el => el.remove());
+
       if (snapshot.empty) {
-        if (isFirstFirebaseLoad) {
-          fbDivider.style.display = 'none';
-        }
-        isFirstFirebaseLoad = false;
+        isFirstLoad = false;
         return;
       }
 
-      let newCardsAdded = 0;
-      const cards = [];
-
+      // Добавляем карточки из Firebase (без разделителя)
+      let addedCount = 0;
       snapshot.forEach((doc) => {
         const card = { id: doc.id, ...doc.data() };
-        cards.push(card);
+        const el = createCardElement(card);
+        // Добавляем класс для стилизации (опционально)
+        el.classList.add('firebase-card');
+        cardsContainer.appendChild(el);
+        addedCount++;
       });
 
-      // Фильтруем карточки, которых ещё нет на странице
-      const newCards = cards.filter(card => !isCardExists(card));
-
-      if (newCards.length > 0) {
-        // Показываем разделитель, если его ещё нет
-        if (fbDivider.style.display === 'none') {
-          fbDivider.style.display = 'flex';
-        }
-
-        // Добавляем новые карточки
-        newCards.forEach(card => {
-          const el = createCardElement(card);
-          cardsContainer.appendChild(el);
-          newCardsAdded++;
-        });
-
-        // Показываем бейдж обновления
-        if (!isFirstFirebaseLoad && newCardsAdded > 0) {
-          updateBadge.style.display = 'block';
-          setTimeout(() => {
-            updateBadge.style.display = 'none';
-          }, 2000);
-        }
+      // Показываем бейдж, если это не первая загрузка
+      if (!isFirstLoad && addedCount > 0) {
+        updateBadge.style.display = 'block';
+        setTimeout(() => {
+          updateBadge.style.display = 'none';
+        }, 2000);
       }
 
-      isFirstFirebaseLoad = false;
-      firebaseCardsLoaded += newCardsAdded;
+      isFirstLoad = false;
 
     }, (error) => {
-      console.error('Ошибка Firebase:', error);
-      // Если ошибка — скрываем разделитель
-      fbDivider.style.display = 'none';
+      console.error('Firebase ошибка:', error);
+    });
+
+    // ===== ТОГГЛ ФУНКЦИЙ (работает для всех карточек) =====
+    cardsContainer.addEventListener('click', function(e) {
+      const btn = e.target.closest('.toggle-features-btn');
+      if (!btn) return;
+
+      const cardBody = btn.closest('.card-body');
+      if (!cardBody) return;
+
+      const wrapper = cardBody.querySelector('.card-features-wrapper');
+      const label = btn.querySelector('.toggle-label');
+      const icon = btn.querySelector('.toggle-icon');
+
+      if (!wrapper) return;
+
+      const isCollapsed = wrapper.classList.contains('collapsed');
+
+      if (isCollapsed) {
+        wrapper.classList.remove('collapsed');
+        if (label) label.textContent = 'Скрыть';
+        if (icon) icon.classList.remove('rotated');
+      } else {
+        wrapper.classList.add('collapsed');
+        if (label) label.textContent = 'Показать';
+        if (icon) icon.classList.add('rotated');
+      }
     });
 
     // ===== тема =====
@@ -1059,33 +893,6 @@
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         dropdown.classList.remove('open');
-      }
-    });
-
-    // ===== Тоггл функций для ВСЕХ карточек (включая добавленные динамически) =====
-    // Используем делегирование событий
-    cardsContainer.addEventListener('click', function(e) {
-      const btn = e.target.closest('.toggle-features-btn');
-      if (!btn) return;
-
-      const cardBody = btn.closest('.card-body');
-      if (!cardBody) return;
-
-      const wrapper = cardBody.querySelector('.card-features-wrapper');
-      const label = btn.querySelector('.toggle-label');
-      const icon = btn.querySelector('.toggle-icon');
-
-      if (!wrapper) return;
-
-      const isCollapsed = wrapper.classList.contains('collapsed');
-      if (isCollapsed) {
-        wrapper.classList.remove('collapsed');
-        label.textContent = 'Скрыть';
-        icon.classList.remove('rotated');
-      } else {
-        wrapper.classList.add('collapsed');
-        label.textContent = 'Показать';
-        icon.classList.add('rotated');
       }
     });
   </script>
