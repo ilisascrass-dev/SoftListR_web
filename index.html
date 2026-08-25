@@ -78,13 +78,12 @@
             background: var(--md-sys-color-surface-container);
             border-radius: 1.5rem;
             border: 1px solid var(--md-sys-color-outline-variant);
-            margin-bottom: 1.2rem;
+            margin-bottom: 0.8rem;
             transition: background 0.3s, border 0.3s, box-shadow 0.3s;
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
 
-        /* Тень при прокрутке */
         .top-bar.scrolled {
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
         }
@@ -258,6 +257,78 @@
             background: var(--md-sys-color-on-primary);
         }
 
+        /* ===== ПОИСК ===== */
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 1rem;
+            position: sticky;
+            top: 90px;
+            z-index: 99;
+            background: var(--md-sys-color-surface-container);
+            border-radius: 1.5rem;
+            border: 1px solid var(--md-sys-color-outline-variant);
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        [data-theme="dark"] .search-container {
+            background: var(--md-sys-color-surface-container-high);
+            border-color: var(--md-sys-color-surface-variant);
+        }
+
+        .search-container:focus-within {
+            border-color: var(--md-sys-color-primary);
+            box-shadow: 0 0 0 3px var(--md-sys-color-primary-container);
+        }
+
+        .search-container i {
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.5;
+            font-size: 1rem;
+        }
+
+        .search-container input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
+            color: var(--md-sys-color-on-surface);
+            outline: none;
+            padding: 0.3rem 0;
+        }
+
+        .search-container input::placeholder {
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.4;
+        }
+
+        .search-clear {
+            background: none;
+            border: none;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.3;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0.2rem;
+            transition: opacity 0.2s;
+            display: none;
+        }
+
+        .search-clear:hover {
+            opacity: 0.8;
+        }
+
+        .search-clear.visible {
+            display: block;
+        }
+
         /* КАРТОЧКИ */
         .cards {
             width: 100%;
@@ -273,7 +344,11 @@
             border-radius: 2rem;
             border: 1px solid var(--md-sys-color-outline-variant);
             overflow: hidden;
-            transition: background 0.3s, border 0.3s;
+            transition: background 0.3s, border 0.3s, opacity 0.3s, transform 0.3s;
+        }
+
+        .card.hidden {
+            display: none;
         }
 
         [data-theme="dark"] .card {
@@ -417,6 +492,15 @@
             color: var(--md-sys-color-on-primary-container);
         }
 
+        /* Подсветка поиска */
+        .highlight {
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+            padding: 0.1rem 0.2rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
         .card-footer {
             display: flex;
             justify-content: space-between;
@@ -459,6 +543,25 @@
 
         .btn-download i {
             font-size: 0.8rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.5;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .no-results i {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .no-results.visible {
+            display: block;
         }
 
         .update-badge {
@@ -510,6 +613,14 @@
                 height: 36px;
                 font-size: 1rem;
             }
+            .search-container {
+                top: 75px;
+                padding: 0.4rem 0.8rem;
+                border-radius: 1.2rem;
+            }
+            .search-container input {
+                font-size: 0.85rem;
+            }
             .card-body {
                 padding: 0.8rem 1rem 1rem;
             }
@@ -535,7 +646,7 @@
 </head>
 <body>
 
-    <!-- ШАПКА — ПРИЛИПАЕТ К ВЕРХУ -->
+    <!-- ШАПКА -->
     <div class="top-bar" id="topBar">
         <div class="brand-group">
             <div class="logo-icon"><i class="fas fa-cubes"></i></div>
@@ -560,8 +671,22 @@
         </div>
     </div>
 
+    <!-- ===== ПОИСК ===== -->
+    <div class="search-container" id="searchContainer">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Поиск карточек..." autocomplete="off" />
+        <button class="search-clear" id="searchClear"><i class="fas fa-times"></i></button>
+    </div>
+
     <!-- КАРТОЧКИ -->
-    <div class="cards" id="cardsContainer"></div>
+    <div class="cards" id="cardsContainer">
+        <!-- Карточки будут здесь -->
+    </div>
+
+    <div class="no-results" id="noResults">
+        <i class="fas fa-search"></i>
+        Ничего не найдено
+    </div>
 
     <div class="update-badge" id="updateBadge"><i class="fas fa-sync-alt fa-spin"></i> Обновлено</div>
     <div class="footer">SoftListR · made with ❤️</div>
@@ -593,6 +718,9 @@
         const db = getFirestore(app);
         const container = document.getElementById('cardsContainer');
         const updateBadge = document.getElementById('updateBadge');
+        const searchInput = document.getElementById('searchInput');
+        const searchClear = document.getElementById('searchClear');
+        const noResults = document.getElementById('noResults');
 
         // ===== ВСТРОЕННЫЕ КАРТОЧКИ =====
         const builtin = [{
@@ -611,12 +739,29 @@
             requirements: "Root",
             file: "12000000dollarov.sh",
             features: ["Esp", "Esp Box"]
+        }, {
+            title: "Lunacy Crack",
+            tag: "Чит на Android",
+            image: "https://i.postimg.cc/PxX2ks7h/IMG-20260824-145617-186.jpg",
+            version: "1.0.0",
+            requirements: "Android",
+            file: "lunacy.apk",
+            features: ["Esp", "AimBot", "SkinChanger", "FireRate", "Infinity Ammo", "WallShot"]
+        }, {
+            title: "FladeWare",
+            tag: "Android",
+            image: "https://i.postimg.cc/NGzFT8BV/Yi-VOe7CShc-YLx-GPPEfn9Ig.jpg",
+            version: "2.1.0",
+            requirements: "Android",
+            file: "fladeware.apk",
+            features: ["Esp", "AimBot", "TriggerBot", "SkinChanger", "RCS", "Fov", "Bullet Tracers", "Hit Crosses", "ViewModel", "Config"]
         }];
 
         // ===== СОЗДАНИЕ КАРТОЧКИ =====
         function createCard(card) {
             const div = document.createElement('div');
             div.className = 'card';
+            div.dataset.title = card.title.toLowerCase();
             const tags = card.features?.length ? card.features.map(f => `<span class="tag">${f}</span>`).join('') : '';
             div.innerHTML = `
                 <div class="card-img"><img src="${card.image}" alt="${card.title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22500%22 height=%22280%22 viewBox=%220 0 500 280%22%3E%3Crect width=%22500%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%22250%22 y=%22145%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2230%22 font-family=%22sans-serif%22%3E📷%3C/text%3E%3C/svg%3E'" /></div>
@@ -646,7 +791,6 @@
         let isFirstLoad = true;
 
         onSnapshot(q, (snapshot) => {
-            // Удаляем старые Firebase-карточки
             document.querySelectorAll('.firebase-card').forEach(el => el.remove());
 
             if (snapshot.empty) {
@@ -663,7 +807,6 @@
                 addedCount++;
             });
 
-            // Показываем бейдж, если это не первая загрузка
             if (!isFirstLoad && addedCount > 0) {
                 updateBadge.style.display = 'block';
                 setTimeout(() => {
@@ -672,6 +815,9 @@
             }
 
             isFirstLoad = false;
+
+            // Обновляем поиск после добавления новых карточек
+            filterCards(searchInput.value.trim());
         }, (error) => {
             console.error('Firebase ошибка:', error);
         });
@@ -694,6 +840,34 @@
                 if (label) label.textContent = 'Показать';
                 if (icon) icon.classList.add('rotated');
             }
+        });
+
+        // ===== ПОИСК =====
+        function filterCards(query) {
+            const cards = container.querySelectorAll('.card');
+            let found = false;
+
+            cards.forEach(card => {
+                const title = card.dataset.title || '';
+                const match = title.includes(query.toLowerCase());
+                card.classList.toggle('hidden', !match);
+                if (match) found = true;
+            });
+
+            noResults.classList.toggle('visible', !found && query.length > 0);
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            filterCards(query);
+            searchClear.classList.toggle('visible', query.length > 0);
+        });
+
+        searchClear.addEventListener('click', function() {
+            searchInput.value = '';
+            searchInput.focus();
+            filterCards('');
+            this.classList.remove('visible');
         });
 
         // ===== ТЕНЬ ПРИ ПРОКРУТКЕ =====
