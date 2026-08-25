@@ -9,24 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
             padding: 1rem;
             background: var(--md-sys-color-background);
             color: var(--md-sys-color-on-background);
             transition: background 0.3s ease, color 0.2s ease;
         }
-
         :root {
             --md-sys-color-primary: #1b3bff;
             --md-sys-color-on-primary: #ffffff;
@@ -44,7 +36,6 @@
             --md-sys-color-surface-container-high: #e6e5ec;
             --md-sys-color-surface-container-highest: #dad9e0;
         }
-
         [data-theme="dark"] {
             --md-sys-color-primary: #b9c3ff;
             --md-sys-color-on-primary: #1a2a8a;
@@ -63,276 +54,112 @@
             --md-sys-color-surface-container-highest: #35353d;
         }
 
-        /* ===== ШАПКА (sticky) ===== */
         .top-bar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            width: 100%;
-            max-width: 600px;
+            position: sticky; top: 0; z-index: 100;
+            width: 100%; max-width: 600px;
             padding: 0.8rem 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 0.5rem;
+            display: flex; align-items: center; justify-content: space-between; gap: 0.5rem;
             background: var(--md-sys-color-surface-container);
-            border-radius: 1.5rem;
-            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 1.5rem; border: 1px solid var(--md-sys-color-outline-variant);
             margin-bottom: 0.8rem;
             transition: background 0.3s, border 0.3s, box-shadow 0.3s;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         }
+        .top-bar.scrolled { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+        [data-theme="dark"] .top-bar { background: var(--md-sys-color-surface-container-high); border-color: var(--md-sys-color-surface-variant); }
 
-        .top-bar.scrolled {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        [data-theme="dark"] .top-bar {
-            background: var(--md-sys-color-surface-container-high);
-            border-color: var(--md-sys-color-surface-variant);
-        }
-
-        .brand-group {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
+        .brand-group { display: flex; align-items: center; gap: 0.6rem; }
         .logo-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--md-sys-color-primary);
-            color: var(--md-sys-color-on-primary);
+            width: 44px; height: 44px;
+            background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
             border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; flex-shrink: 0;
         }
+        .brand-name { font-size: 1.6rem; font-weight: 700; color: var(--md-sys-color-on-surface); }
+        .brand-tagline { font-size: 0.7rem; font-weight: 500; color: var(--md-sys-color-on-surface-variant); opacity: 0.6; }
 
-        .brand-name {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--md-sys-color-on-surface);
-        }
-
-        .brand-tagline {
-            font-size: 0.7rem;
-            font-weight: 500;
-            color: var(--md-sys-color-on-surface-variant);
-            opacity: 0.6;
-        }
-
-        .settings-wrapper {
-            position: relative;
-        }
-
+        .settings-wrapper { position: relative; }
         .settings-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
+            width: 44px; height: 44px; border-radius: 50%;
             background: var(--md-sys-color-surface-container-high);
             border: 1px solid var(--md-sys-color-outline-variant);
             color: var(--md-sys-color-on-surface-variant);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; cursor: pointer;
             transition: background 0.2s;
         }
-
-        .settings-icon:hover {
-            background: var(--md-sys-color-surface-container-highest);
-        }
-
+        .settings-icon:hover { background: var(--md-sys-color-surface-container-highest); }
         .settings-dropdown {
-            position: absolute;
-            top: calc(100% + 8px);
-            right: 0;
-            min-width: 180px;
+            position: absolute; top: calc(100% + 8px); right: 0; min-width: 180px;
             background: var(--md-sys-color-surface-container);
-            border-radius: 1.2rem;
-            padding: 1rem 1.2rem;
+            border-radius: 1.2rem; padding: 1rem 1.2rem;
             border: 1px solid var(--md-sys-color-outline-variant);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
-            opacity: 0;
-            visibility: hidden;
+            box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+            opacity: 0; visibility: hidden;
             transform: translateY(-8px) scale(0.96);
             transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
             z-index: 10;
         }
-
         [data-theme="dark"] .settings-dropdown {
             background: var(--md-sys-color-surface-container-high);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.5);
             border-color: var(--md-sys-color-surface-variant);
         }
-
-        .settings-dropdown.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0) scale(1);
-        }
-
-        .dropdown-title {
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--md-sys-color-on-surface-variant);
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .theme-switch-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
-        .theme-switch-row span {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--md-sys-color-on-surface);
-        }
-
-        .theme-icons {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--md-sys-color-on-surface-variant);
-        }
+        .settings-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        .dropdown-title { font-size: 0.75rem; font-weight: 600; color: var(--md-sys-color-on-surface-variant); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .theme-switch-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .theme-switch-row span { font-size: 0.85rem; font-weight: 500; color: var(--md-sys-color-on-surface); }
+        .theme-icons { display: flex; align-items: center; gap: 6px; color: var(--md-sys-color-on-surface-variant); }
 
         .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 22px;
-            flex-shrink: 0;
-            cursor: pointer;
+            position: relative; display: inline-block;
+            width: 40px; height: 22px; flex-shrink: 0; cursor: pointer;
         }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
+        .switch input { opacity: 0; width: 0; height: 0; }
         .slider {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background: var(--md-sys-color-surface-container-highest);
-            transition: 0.25s;
-            border-radius: 40px;
+            transition: 0.25s; border-radius: 40px;
         }
-
         .slider::before {
-            content: "";
-            position: absolute;
-            height: 16px;
-            width: 16px;
-            left: 3px;
-            bottom: 3px;
+            content: ""; position: absolute;
+            height: 16px; width: 16px; left: 3px; bottom: 3px;
             background: var(--md-sys-color-surface);
-            transition: 0.25s;
-            border-radius: 50%;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+            transition: 0.25s; border-radius: 50%;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
+        .switch input:checked+.slider { background: var(--md-sys-color-primary); }
+        .switch input:checked+.slider::before { transform: translateX(18px); background: var(--md-sys-color-on-primary); }
 
-        .switch input:checked+.slider {
-            background: var(--md-sys-color-primary);
-        }
-
-        .switch input:checked+.slider::before {
-            transform: translateX(18px);
-            background: var(--md-sys-color-on-primary);
-        }
-
-        /* ===== ПОИСК ===== */
         .search-container {
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 1rem;
-            position: sticky;
-            top: 90px;
-            z-index: 99;
+            width: 100%; max-width: 600px; margin-bottom: 1rem;
+            position: sticky; top: 90px; z-index: 99;
             background: var(--md-sys-color-surface-container);
-            border-radius: 1.5rem;
-            border: 1px solid var(--md-sys-color-outline-variant);
+            border-radius: 1.5rem; border: 1px solid var(--md-sys-color-outline-variant);
             padding: 0.5rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            display: flex; align-items: center; gap: 0.5rem;
             transition: background 0.3s, border 0.3s, box-shadow 0.3s;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
         }
-
-        [data-theme="dark"] .search-container {
-            background: var(--md-sys-color-surface-container-high);
-            border-color: var(--md-sys-color-surface-variant);
-        }
-
-        .search-container:focus-within {
-            border-color: var(--md-sys-color-primary);
-            box-shadow: 0 0 0 3px var(--md-sys-color-primary-container);
-        }
-
-        .search-container i {
-            color: var(--md-sys-color-on-surface-variant);
-            opacity: 0.5;
-            font-size: 1rem;
-        }
-
+        [data-theme="dark"] .search-container { background: var(--md-sys-color-surface-container-high); border-color: var(--md-sys-color-surface-variant); }
+        .search-container:focus-within { border-color: var(--md-sys-color-primary); box-shadow: 0 0 0 3px var(--md-sys-color-primary-container); }
+        .search-container i { color: var(--md-sys-color-on-surface-variant); opacity: 0.5; font-size: 1rem; }
         .search-container input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            color: var(--md-sys-color-on-surface);
-            outline: none;
-            padding: 0.3rem 0;
+            flex: 1; border: none; background: transparent;
+            font-size: 0.95rem; font-family: 'Inter', sans-serif;
+            color: var(--md-sys-color-on-surface); outline: none; padding: 0.3rem 0;
         }
-
-        .search-container input::placeholder {
-            color: var(--md-sys-color-on-surface-variant);
-            opacity: 0.4;
-        }
-
+        .search-container input::placeholder { color: var(--md-sys-color-on-surface-variant); opacity: 0.4; }
         .search-clear {
-            background: none;
-            border: none;
-            color: var(--md-sys-color-on-surface-variant);
-            opacity: 0.3;
-            cursor: pointer;
-            font-size: 0.9rem;
-            padding: 0.2rem;
-            transition: opacity 0.2s;
-            display: none;
+            background: none; border: none; color: var(--md-sys-color-on-surface-variant);
+            opacity: 0.3; cursor: pointer; font-size: 0.9rem; padding: 0.2rem;
+            transition: opacity 0.2s; display: none;
         }
+        .search-clear:hover { opacity: 0.8; }
+        .search-clear.visible { display: block; }
 
-        .search-clear:hover {
-            opacity: 0.8;
-        }
-
-        .search-clear.visible {
-            display: block;
-        }
-
-        /* ===== КАРТОЧКИ ===== */
-        .cards {
-            width: 100%;
-            max-width: 600px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
+        .cards { width: 100%; max-width: 600px; display: flex; flex-direction: column; gap: 1.2rem; }
 
         .card {
             width: 100%;
@@ -342,74 +169,28 @@
             overflow: hidden;
             transition: background 0.3s, border 0.3s, opacity 0.3s, transform 0.3s;
         }
+        .card.hidden { display: none; }
+        [data-theme="dark"] .card { background: var(--md-sys-color-surface-container-high); border-color: var(--md-sys-color-surface-variant); }
 
-        .card.hidden {
-            display: none;
-        }
+        .card-img { width: 100%; aspect-ratio: 16/9; overflow: hidden; background: var(--md-sys-color-surface-container-highest); }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        [data-theme="dark"] .card {
-            background: var(--md-sys-color-surface-container-high);
-            border-color: var(--md-sys-color-surface-variant);
-        }
+        .card-body { padding: 1.2rem 1.4rem 1.4rem; }
 
-        .card-img {
-            width: 100%;
-            aspect-ratio: 16/9;
-            overflow: hidden;
-            background: var(--md-sys-color-surface-container-highest);
-        }
-
-        .card-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .card-body {
-            padding: 1.2rem 1.4rem 1.4rem;
-        }
-
-        .card-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--md-sys-color-on-surface);
-        }
-
-        .card-title small {
-            font-size: 0.8rem;
-            font-weight: 400;
-            color: var(--md-sys-color-on-surface-variant);
-            opacity: 0.6;
-            margin-left: 6px;
-        }
+        .card-title { font-size: 1.4rem; font-weight: 700; color: var(--md-sys-color-on-surface); }
+        .card-title small { font-size: 0.8rem; font-weight: 400; color: var(--md-sys-color-on-surface-variant); opacity: 0.6; margin-left: 6px; }
 
         .card-meta {
-            display: flex;
-            flex-wrap: wrap;
+            display: flex; flex-wrap: wrap;
             gap: 0.3rem 1rem;
             margin: 0.4rem 0 0.6rem;
             font-size: 0.9rem;
             color: var(--md-sys-color-on-surface-variant);
         }
+        .card-meta span { display: flex; align-items: center; gap: 4px; }
+        .card-meta i { font-size: 0.8rem; color: var(--md-sys-color-primary); opacity: 0.7; }
 
-        .card-meta span {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .card-meta i {
-            font-size: 0.8rem;
-            color: var(--md-sys-color-primary);
-            opacity: 0.7;
-        }
-
-        .card-divider {
-            height: 1px;
-            background: var(--md-sys-color-outline-variant);
-            margin: 0.6rem 0 0.8rem;
-        }
+        .card-divider { height: 1px; background: var(--md-sys-color-outline-variant); margin: 0.6rem 0 0.8rem; }
 
         .card-features-header {
             display: flex;
@@ -417,7 +198,6 @@
             justify-content: space-between;
             margin-bottom: 0.5rem;
         }
-
         .card-features-title {
             font-size: 0.8rem;
             font-weight: 600;
@@ -441,30 +221,20 @@
             opacity: 0.6;
             transition: opacity 0.2s;
         }
+        .toggle-features-btn:hover { opacity: 1; }
+        .toggle-features-btn i { transition: transform 0.3s ease; font-size: 0.8rem; }
+        .toggle-features-btn i.rotated { transform: rotate(180deg); }
 
-        .toggle-features-btn:hover {
-            opacity: 1;
-        }
-
-        .toggle-features-btn i {
-            transition: transform 0.3s ease;
-            font-size: 0.8rem;
-        }
-
-        .toggle-features-btn i.rotated {
-            transform: rotate(180deg);
-        }
-
+        /* ФУНКЦИИ СКРЫТЫ ПО УМОЛЧАНИЮ */
         .card-features-wrapper {
             overflow: hidden;
             transition: max-height 0.35s ease, opacity 0.25s ease;
-            max-height: 500px;
-            opacity: 1;
-        }
-
-        .card-features-wrapper.collapsed {
             max-height: 0;
             opacity: 0;
+        }
+        .card-features-wrapper.open {
+            max-height: 500px;
+            opacity: 1;
         }
 
         .card-features {
@@ -473,7 +243,6 @@
             gap: 0.4rem 0.6rem;
             padding-top: 0.1rem;
         }
-
         .card-features .tag {
             font-size: 0.9rem;
             font-weight: 500;
@@ -482,7 +251,6 @@
             background: var(--md-sys-color-primary-container);
             color: var(--md-sys-color-on-primary-container);
         }
-
         [data-theme="dark"] .card-features .tag {
             background: var(--md-sys-color-primary-container);
             color: var(--md-sys-color-on-primary-container);
@@ -496,17 +264,8 @@
             padding-top: 0.8rem;
             border-top: 1px solid var(--md-sys-color-outline-variant);
         }
-
-        .card-version {
-            font-size: 0.85rem;
-            color: var(--md-sys-color-on-surface-variant);
-            opacity: 0.6;
-        }
-
-        .card-version strong {
-            color: var(--md-sys-color-on-surface);
-            opacity: 0.9;
-        }
+        .card-version { font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant); opacity: 0.6; }
+        .card-version strong { color: var(--md-sys-color-on-surface); opacity: 0.9; }
 
         .btn-download {
             background: var(--md-sys-color-primary);
@@ -523,14 +282,8 @@
             text-decoration: none;
             transition: transform 0.2s;
         }
-
-        .btn-download:hover {
-            transform: scale(1.05);
-        }
-
-        .btn-download i {
-            font-size: 0.8rem;
-        }
+        .btn-download:hover { transform: scale(1.05); }
+        .btn-download i { font-size: 0.8rem; }
 
         .no-results {
             text-align: center;
@@ -540,22 +293,11 @@
             font-size: 0.95rem;
             display: none;
         }
-
-        .no-results i {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .no-results.visible {
-            display: block;
-        }
+        .no-results i { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+        .no-results.visible { display: block; }
 
         .update-badge {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 50%;
-            transform: translateX(-50%);
+            position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
             background: var(--md-sys-color-surface-container);
             border: 1px solid var(--md-sys-color-primary);
             color: var(--md-sys-color-on-surface);
@@ -563,15 +305,11 @@
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 500;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             z-index: 100;
             display: none;
         }
-
-        .update-badge i {
-            margin-right: 4px;
-            color: var(--md-sys-color-primary);
-        }
+        .update-badge i { margin-right: 4px; color: var(--md-sys-color-primary); }
 
         .footer {
             margin-top: 2rem;
@@ -582,58 +320,24 @@
         }
 
         @media (max-width: 550px) {
-            .top-bar {
-                padding: 0.5rem 0.8rem;
-                border-radius: 1.2rem;
-            }
-            .brand-name {
-                font-size: 1.2rem;
-            }
-            .logo-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 18px;
-                border-radius: 12px;
-            }
-            .settings-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
-            }
-            .search-container {
-                top: 75px;
-                padding: 0.4rem 0.8rem;
-                border-radius: 1.2rem;
-            }
-            .search-container input {
-                font-size: 0.85rem;
-            }
-            .card-body {
-                padding: 0.8rem 1rem 1rem;
-            }
-            .card-title {
-                font-size: 1.1rem;
-            }
-            .card-meta {
-                font-size: 0.8rem;
-            }
-            .card-features .tag {
-                font-size: 0.8rem;
-                padding: 0.2rem 0.6rem;
-            }
-            .btn-download {
-                font-size: 0.8rem;
-                padding: 0.3rem 1rem;
-            }
-            .card-version {
-                font-size: 0.75rem;
-            }
+            .top-bar { padding: 0.5rem 0.8rem; border-radius: 1.2rem; }
+            .brand-name { font-size: 1.2rem; }
+            .logo-icon { width: 36px; height: 36px; font-size: 18px; border-radius: 12px; }
+            .settings-icon { width: 36px; height: 36px; font-size: 1rem; }
+            .search-container { top: 75px; padding: 0.4rem 0.8rem; border-radius: 1.2rem; }
+            .search-container input { font-size: 0.85rem; }
+            .card-body { padding: 0.8rem 1rem 1rem; }
+            .card-title { font-size: 1.1rem; }
+            .card-meta { font-size: 0.8rem; }
+            .card-features .tag { font-size: 0.8rem; padding: 0.2rem 0.6rem; }
+            .btn-download { font-size: 0.8rem; padding: 0.3rem 1rem; }
+            .card-version { font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== ШАПКА ===== -->
+    <!-- ШАПКА -->
     <div class="top-bar" id="topBar">
         <div class="brand-group">
             <div class="logo-icon"><i class="fas fa-cubes"></i></div>
@@ -658,14 +362,14 @@
         </div>
     </div>
 
-    <!-- ===== ПОИСК ===== -->
+    <!-- ПОИСК -->
     <div class="search-container" id="searchContainer">
         <i class="fas fa-search"></i>
         <input type="text" id="searchInput" placeholder="Поиск карточек..." autocomplete="off" />
         <button class="search-clear" id="searchClear"><i class="fas fa-times"></i></button>
     </div>
 
-    <!-- ===== КАРТОЧКИ ===== -->
+    <!-- КАРТОЧКИ -->
     <div class="cards" id="cardsContainer"></div>
 
     <div class="no-results" id="noResults">
@@ -707,7 +411,7 @@
         const searchClear = document.getElementById('searchClear');
         const noResults = document.getElementById('noResults');
 
-        // ===== ВСТРОЕННЫЕ КАРТОЧКИ (2 штуки, показываются мгновенно) =====
+        // ===== ВСТРОЕННЫЕ КАРТОЧКИ =====
         const builtinCards = [{
             title: "Чит на Standoff 2 iOS",
             tag: "TrollStore",
@@ -732,7 +436,9 @@
             div.className = 'card';
             if (isFirebase) div.classList.add('firebase-card');
             div.dataset.title = card.title.toLowerCase();
+
             const tags = card.features?.length ? card.features.map(f => `<span class="tag">${f}</span>`).join('') : '';
+
             div.innerHTML = `
                 <div class="card-img"><img src="${card.image}" alt="${card.title}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22500%22 height=%22280%22 viewBox=%220 0 500 280%22%3E%3Crect width=%22500%22 height=%22280%22 fill=%22%23ddd%22/%3E%3Ctext x=%22250%22 y=%22145%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2230%22 font-family=%22sans-serif%22%3E📷%3C/text%3E%3C/svg%3E'" /></div>
                 <div class="card-body">
@@ -741,7 +447,7 @@
                     <div class="card-divider"></div>
                     <div class="card-features-header">
                         <div class="card-features-title"><i class="fas fa-list-ul"></i> Функции</div>
-                        <button class="toggle-features-btn"><span class="toggle-label">Скрыть</span><i class="fas fa-chevron-up toggle-icon"></i></button>
+                        <button class="toggle-features-btn"><span class="toggle-label">Показать</span><i class="fas fa-chevron-down toggle-icon"></i></button>
                     </div>
                     <div class="card-features-wrapper"><div class="card-features">${tags}</div></div>
                     <div class="card-footer">
@@ -750,18 +456,18 @@
                     </div>
                 </div>
             `;
+
             return div;
         }
 
-        // ===== ПОКАЗЫВАЕМ ВСТРОЕННЫЕ КАРТОЧКИ (мгновенно) =====
+        // ===== ПОКАЗЫВАЕМ ВСТРОЕННЫЕ =====
         builtinCards.forEach(c => container.appendChild(createCard(c, false)));
 
-        // ===== FIREBASE — добавляем карточки снизу =====
+        // ===== FIREBASE =====
         const q = query(collection(db, "cards"), orderBy("createdAt", "desc"));
         let isFirstLoad = true;
 
         onSnapshot(q, (snapshot) => {
-            // Удаляем только старые Firebase-карточки (не трогаем встроенные)
             document.querySelectorAll('.firebase-card').forEach(el => el.remove());
 
             if (snapshot.empty) {
@@ -777,7 +483,6 @@
                 addedCount++;
             });
 
-            // Показываем бейдж, если это не первая загрузка
             if (!isFirstLoad && addedCount > 0) {
                 updateBadge.style.display = 'block';
                 setTimeout(() => {
@@ -786,8 +491,6 @@
             }
 
             isFirstLoad = false;
-
-            // Обновляем поиск после добавления новых карточек
             filterCards(searchInput.value.trim());
         }, (error) => {
             console.error('Firebase ошибка:', error);
@@ -821,23 +524,33 @@
             this.classList.remove('visible');
         });
 
-        // ===== ТОГГЛ ФУНКЦИЙ =====
+        // ===== ТОГГЛ ФУНКЦИЙ (СКРЫТЫ ПО УМОЛЧАНИЮ) =====
         container.addEventListener('click', function(e) {
             const btn = e.target.closest('.toggle-features-btn');
             if (!btn) return;
+
             const wrapper = btn.closest('.card-body').querySelector('.card-features-wrapper');
             const label = btn.querySelector('.toggle-label');
             const icon = btn.querySelector('.toggle-icon');
+
             if (!wrapper) return;
-            const collapsed = wrapper.classList.contains('collapsed');
-            if (collapsed) {
-                wrapper.classList.remove('collapsed');
-                if (label) label.textContent = 'Скрыть';
-                if (icon) icon.classList.remove('rotated');
-            } else {
-                wrapper.classList.add('collapsed');
+
+            const isOpen = wrapper.classList.contains('open');
+
+            if (isOpen) {
+                wrapper.classList.remove('open');
                 if (label) label.textContent = 'Показать';
-                if (icon) icon.classList.add('rotated');
+                if (icon) {
+                    icon.classList.remove('rotated');
+                    icon.className = 'fas fa-chevron-down toggle-icon';
+                }
+            } else {
+                wrapper.classList.add('open');
+                if (label) label.textContent = 'Скрыть';
+                if (icon) {
+                    icon.classList.add('rotated');
+                    icon.className = 'fas fa-chevron-up toggle-icon rotated';
+                }
             }
         });
 
