@@ -63,8 +63,11 @@
             --md-sys-color-surface-container-highest: #35353d;
         }
 
-        /* ШАПКА */
+        /* ШАПКА — ПРИЛИПАЕТ К ВЕРХУ */
         .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
             width: 100%;
             max-width: 600px;
             padding: 0.8rem 1.2rem;
@@ -76,7 +79,23 @@
             border-radius: 1.5rem;
             border: 1px solid var(--md-sys-color-outline-variant);
             margin-bottom: 1.2rem;
-            transition: background 0.3s, border 0.3s;
+            transition: background 0.3s, border 0.3s, box-shadow 0.3s;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Тень при прокрутке */
+        .top-bar.scrolled {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] .top-bar.scrolled {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        [data-theme="dark"] .top-bar {
+            background: var(--md-sys-color-surface-container-high);
+            border-color: var(--md-sys-color-surface-variant);
         }
 
         .brand-group {
@@ -84,6 +103,7 @@
             align-items: center;
             gap: 0.6rem;
         }
+
         .logo-icon {
             width: 44px;
             height: 44px;
@@ -96,11 +116,13 @@
             font-size: 22px;
             flex-shrink: 0;
         }
+
         .brand-name {
             font-size: 1.6rem;
             font-weight: 700;
             color: var(--md-sys-color-on-surface);
         }
+
         .brand-tagline {
             font-size: 0.7rem;
             font-weight: 500;
@@ -111,6 +133,7 @@
         .settings-wrapper {
             position: relative;
         }
+
         .settings-icon {
             width: 44px;
             height: 44px;
@@ -123,7 +146,13 @@
             justify-content: center;
             font-size: 1.2rem;
             cursor: pointer;
+            transition: background 0.2s;
         }
+
+        .settings-icon:hover {
+            background: var(--md-sys-color-surface-container-highest);
+        }
+
         .settings-dropdown {
             position: absolute;
             top: calc(100% + 8px);
@@ -140,11 +169,19 @@
             transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
             z-index: 10;
         }
+
+        [data-theme="dark"] .settings-dropdown {
+            background: var(--md-sys-color-surface-container-high);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+            border-color: var(--md-sys-color-surface-variant);
+        }
+
         .settings-dropdown.open {
             opacity: 1;
             visibility: visible;
             transform: translateY(0) scale(1);
         }
+
         .dropdown-title {
             font-size: 0.75rem;
             font-weight: 600;
@@ -152,17 +189,20 @@
             text-transform: uppercase;
             margin-bottom: 0.5rem;
         }
+
         .theme-switch-row {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
         }
+
         .theme-switch-row span {
             font-size: 0.85rem;
             font-weight: 500;
             color: var(--md-sys-color-on-surface);
         }
+
         .theme-icons {
             display: flex;
             align-items: center;
@@ -178,11 +218,13 @@
             flex-shrink: 0;
             cursor: pointer;
         }
+
         .switch input {
             opacity: 0;
             width: 0;
             height: 0;
         }
+
         .slider {
             position: absolute;
             top: 0;
@@ -193,6 +235,7 @@
             transition: 0.25s;
             border-radius: 40px;
         }
+
         .slider::before {
             content: "";
             position: absolute;
@@ -205,9 +248,11 @@
             border-radius: 50%;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
         }
+
         .switch input:checked+.slider {
             background: var(--md-sys-color-primary);
         }
+
         .switch input:checked+.slider::before {
             transform: translateX(18px);
             background: var(--md-sys-color-on-primary);
@@ -231,12 +276,18 @@
             transition: background 0.3s, border 0.3s;
         }
 
+        [data-theme="dark"] .card {
+            background: var(--md-sys-color-surface-container-high);
+            border-color: var(--md-sys-color-surface-variant);
+        }
+
         .card-img {
             width: 100%;
             aspect-ratio: 16/9;
             overflow: hidden;
             background: var(--md-sys-color-surface-container-highest);
         }
+
         .card-img img {
             width: 100%;
             height: 100%;
@@ -253,6 +304,7 @@
             font-weight: 700;
             color: var(--md-sys-color-on-surface);
         }
+
         .card-title small {
             font-size: 0.8rem;
             font-weight: 400;
@@ -269,11 +321,13 @@
             font-size: 0.9rem;
             color: var(--md-sys-color-on-surface-variant);
         }
+
         .card-meta span {
             display: flex;
             align-items: center;
             gap: 4px;
         }
+
         .card-meta i {
             font-size: 0.8rem;
             color: var(--md-sys-color-primary);
@@ -292,6 +346,7 @@
             justify-content: space-between;
             margin-bottom: 0.5rem;
         }
+
         .card-features-title {
             font-size: 0.8rem;
             font-weight: 600;
@@ -315,13 +370,16 @@
             opacity: 0.6;
             transition: opacity 0.2s;
         }
+
         .toggle-features-btn:hover {
             opacity: 1;
         }
+
         .toggle-features-btn i {
             transition: transform 0.3s ease;
             font-size: 0.8rem;
         }
+
         .toggle-features-btn i.rotated {
             transform: rotate(180deg);
         }
@@ -332,6 +390,7 @@
             max-height: 500px;
             opacity: 1;
         }
+
         .card-features-wrapper.collapsed {
             max-height: 0;
             opacity: 0;
@@ -343,11 +402,17 @@
             gap: 0.4rem 0.6rem;
             padding-top: 0.1rem;
         }
+
         .card-features .tag {
-            font-size: 0.9rem;  /* УВЕЛИЧИЛ ТЕГИ */
+            font-size: 0.9rem;
             font-weight: 500;
             padding: 0.25rem 0.8rem;
             border-radius: 20px;
+            background: var(--md-sys-color-primary-container);
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        [data-theme="dark"] .card-features .tag {
             background: var(--md-sys-color-primary-container);
             color: var(--md-sys-color-on-primary-container);
         }
@@ -360,11 +425,13 @@
             padding-top: 0.8rem;
             border-top: 1px solid var(--md-sys-color-outline-variant);
         }
+
         .card-version {
             font-size: 0.85rem;
             color: var(--md-sys-color-on-surface-variant);
             opacity: 0.6;
         }
+
         .card-version strong {
             color: var(--md-sys-color-on-surface);
             opacity: 0.9;
@@ -385,11 +452,35 @@
             text-decoration: none;
             transition: transform 0.2s;
         }
+
         .btn-download:hover {
             transform: scale(1.05);
         }
+
         .btn-download i {
             font-size: 0.8rem;
+        }
+
+        .update-badge {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--md-sys-color-surface-container);
+            border: 1px solid var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-surface);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            display: none;
+        }
+
+        .update-badge i {
+            margin-right: 4px;
+            color: var(--md-sys-color-primary);
         }
 
         .footer {
@@ -429,7 +520,7 @@
                 font-size: 0.8rem;
             }
             .card-features .tag {
-                font-size: 0.8rem;  /* На мобилках чуть меньше, но всё равно крупно */
+                font-size: 0.8rem;
                 padding: 0.2rem 0.6rem;
             }
             .btn-download {
@@ -444,8 +535,8 @@
 </head>
 <body>
 
-    <!-- ШАПКА -->
-    <div class="top-bar">
+    <!-- ШАПКА — ПРИЛИПАЕТ К ВЕРХУ -->
+    <div class="top-bar" id="topBar">
         <div class="brand-group">
             <div class="logo-icon"><i class="fas fa-cubes"></i></div>
             <div>
@@ -472,6 +563,7 @@
     <!-- КАРТОЧКИ -->
     <div class="cards" id="cardsContainer"></div>
 
+    <div class="update-badge" id="updateBadge"><i class="fas fa-sync-alt fa-spin"></i> Обновлено</div>
     <div class="footer">SoftListR · made with ❤️</div>
 
     <script type="importmap">
@@ -500,7 +592,9 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const container = document.getElementById('cardsContainer');
+        const updateBadge = document.getElementById('updateBadge');
 
+        // ===== ВСТРОЕННЫЕ КАРТОЧКИ =====
         const builtin = [{
             title: "Чит на Standoff 2 iOS",
             tag: "TrollStore",
@@ -519,6 +613,7 @@
             features: ["Esp", "Esp Box"]
         }];
 
+        // ===== СОЗДАНИЕ КАРТОЧКИ =====
         function createCard(card) {
             const div = document.createElement('div');
             div.className = 'card';
@@ -543,20 +638,45 @@
             return div;
         }
 
+        // ===== ПОКАЗЫВАЕМ ВСТРОЕННЫЕ =====
         builtin.forEach(c => container.appendChild(createCard(c)));
 
+        // ===== FIREBASE =====
         const q = query(collection(db, "cards"), orderBy("createdAt", "desc"));
+        let isFirstLoad = true;
+
         onSnapshot(q, (snapshot) => {
+            // Удаляем старые Firebase-карточки
             document.querySelectorAll('.firebase-card').forEach(el => el.remove());
+
+            if (snapshot.empty) {
+                isFirstLoad = false;
+                return;
+            }
+
+            let addedCount = 0;
             snapshot.forEach((doc) => {
                 const card = { id: doc.id, ...doc.data() };
                 const el = createCard(card);
                 el.classList.add('firebase-card');
                 container.appendChild(el);
+                addedCount++;
             });
+
+            // Показываем бейдж, если это не первая загрузка
+            if (!isFirstLoad && addedCount > 0) {
+                updateBadge.style.display = 'block';
+                setTimeout(() => {
+                    updateBadge.style.display = 'none';
+                }, 2000);
+            }
+
+            isFirstLoad = false;
+        }, (error) => {
+            console.error('Firebase ошибка:', error);
         });
 
-        // ТОГГЛ
+        // ===== ТОГГЛ ФУНКЦИЙ =====
         container.addEventListener('click', function(e) {
             const btn = e.target.closest('.toggle-features-btn');
             if (!btn) return;
@@ -576,7 +696,17 @@
             }
         });
 
-        // ТЕМА
+        // ===== ТЕНЬ ПРИ ПРОКРУТКЕ =====
+        const topBar = document.getElementById('topBar');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 10) {
+                topBar.classList.add('scrolled');
+            } else {
+                topBar.classList.remove('scrolled');
+            }
+        });
+
+        // ===== ТЕМА =====
         const toggle = document.getElementById('themeToggle');
         const html = document.documentElement;
         const settingsIcon = document.getElementById('settingsToggle');
@@ -606,4 +736,4 @@
         });
     </script>
 </body>
-                    </html>
+</html>
