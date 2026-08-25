@@ -63,7 +63,7 @@
             --md-sys-color-surface-container-highest: #35353d;
         }
 
-        /* ШАПКА — ПРИЛИПАЕТ К ВЕРХУ */
+        /* ===== ШАПКА (sticky) ===== */
         .top-bar {
             position: sticky;
             top: 0;
@@ -86,10 +86,6 @@
 
         .top-bar.scrolled {
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-        }
-
-        [data-theme="dark"] .top-bar.scrolled {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
         }
 
         [data-theme="dark"] .top-bar {
@@ -329,7 +325,7 @@
             display: block;
         }
 
-        /* КАРТОЧКИ */
+        /* ===== КАРТОЧКИ ===== */
         .cards {
             width: 100%;
             max-width: 600px;
@@ -492,15 +488,6 @@
             color: var(--md-sys-color-on-primary-container);
         }
 
-        /* Подсветка поиска */
-        .highlight {
-            background: var(--md-sys-color-primary-container);
-            color: var(--md-sys-color-on-primary-container);
-            padding: 0.1rem 0.2rem;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
         .card-footer {
             display: flex;
             justify-content: space-between;
@@ -646,7 +633,7 @@
 </head>
 <body>
 
-    <!-- ШАПКА -->
+    <!-- ===== ШАПКА ===== -->
     <div class="top-bar" id="topBar">
         <div class="brand-group">
             <div class="logo-icon"><i class="fas fa-cubes"></i></div>
@@ -678,10 +665,8 @@
         <button class="search-clear" id="searchClear"><i class="fas fa-times"></i></button>
     </div>
 
-    <!-- КАРТОЧКИ -->
-    <div class="cards" id="cardsContainer">
-        <!-- Карточки будут здесь -->
-    </div>
+    <!-- ===== КАРТОЧКИ ===== -->
+    <div class="cards" id="cardsContainer"></div>
 
     <div class="no-results" id="noResults">
         <i class="fas fa-search"></i>
@@ -722,8 +707,8 @@
         const searchClear = document.getElementById('searchClear');
         const noResults = document.getElementById('noResults');
 
-        // ===== ВСТРОЕННЫЕ КАРТОЧКИ =====
-        const builtin = [{
+        // ===== ВСТРОЕННЫЕ КАРТОЧКИ (2 штуки, показываются мгновенно) =====
+        const builtinCards = [{
             title: "Чит на Standoff 2 iOS",
             tag: "TrollStore",
             image: "https://i.postimg.cc/PxX2ks7h/IMG-20260824-145617-186.jpg",
@@ -739,28 +724,13 @@
             requirements: "Root",
             file: "12000000dollarov.sh",
             features: ["Esp", "Esp Box"]
-        }, {
-            title: "Lunacy Crack",
-            tag: "Чит на Android",
-            image: "https://i.postimg.cc/PxX2ks7h/IMG-20260824-145617-186.jpg",
-            version: "1.0.0",
-            requirements: "Android",
-            file: "lunacy.apk",
-            features: ["Esp", "AimBot", "SkinChanger", "FireRate", "Infinity Ammo", "WallShot"]
-        }, {
-            title: "FladeWare",
-            tag: "Android",
-            image: "https://i.postimg.cc/NGzFT8BV/Yi-VOe7CShc-YLx-GPPEfn9Ig.jpg",
-            version: "2.1.0",
-            requirements: "Android",
-            file: "fladeware.apk",
-            features: ["Esp", "AimBot", "TriggerBot", "SkinChanger", "RCS", "Fov", "Bullet Tracers", "Hit Crosses", "ViewModel", "Config"]
         }];
 
         // ===== СОЗДАНИЕ КАРТОЧКИ =====
-        function createCard(card) {
+        function createCard(card, isFirebase = false) {
             const div = document.createElement('div');
             div.className = 'card';
+            if (isFirebase) div.classList.add('firebase-card');
             div.dataset.title = card.title.toLowerCase();
             const tags = card.features?.length ? card.features.map(f => `<span class="tag">${f}</span>`).join('') : '';
             div.innerHTML = `
@@ -783,14 +753,15 @@
             return div;
         }
 
-        // ===== ПОКАЗЫВАЕМ ВСТРОЕННЫЕ =====
-        builtin.forEach(c => container.appendChild(createCard(c)));
+        // ===== ПОКАЗЫВАЕМ ВСТРОЕННЫЕ КАРТОЧКИ (мгновенно) =====
+        builtinCards.forEach(c => container.appendChild(createCard(c, false)));
 
-        // ===== FIREBASE =====
+        // ===== FIREBASE — добавляем карточки снизу =====
         const q = query(collection(db, "cards"), orderBy("createdAt", "desc"));
         let isFirstLoad = true;
 
         onSnapshot(q, (snapshot) => {
+            // Удаляем только старые Firebase-карточки (не трогаем встроенные)
             document.querySelectorAll('.firebase-card').forEach(el => el.remove());
 
             if (snapshot.empty) {
@@ -801,12 +772,12 @@
             let addedCount = 0;
             snapshot.forEach((doc) => {
                 const card = { id: doc.id, ...doc.data() };
-                const el = createCard(card);
-                el.classList.add('firebase-card');
+                const el = createCard(card, true);
                 container.appendChild(el);
                 addedCount++;
             });
 
+            // Показываем бейдж, если это не первая загрузка
             if (!isFirstLoad && addedCount > 0) {
                 updateBadge.style.display = 'block';
                 setTimeout(() => {
@@ -820,26 +791,6 @@
             filterCards(searchInput.value.trim());
         }, (error) => {
             console.error('Firebase ошибка:', error);
-        });
-
-        // ===== ТОГГЛ ФУНКЦИЙ =====
-        container.addEventListener('click', function(e) {
-            const btn = e.target.closest('.toggle-features-btn');
-            if (!btn) return;
-            const wrapper = btn.closest('.card-body').querySelector('.card-features-wrapper');
-            const label = btn.querySelector('.toggle-label');
-            const icon = btn.querySelector('.toggle-icon');
-            if (!wrapper) return;
-            const collapsed = wrapper.classList.contains('collapsed');
-            if (collapsed) {
-                wrapper.classList.remove('collapsed');
-                if (label) label.textContent = 'Скрыть';
-                if (icon) icon.classList.remove('rotated');
-            } else {
-                wrapper.classList.add('collapsed');
-                if (label) label.textContent = 'Показать';
-                if (icon) icon.classList.add('rotated');
-            }
         });
 
         // ===== ПОИСК =====
@@ -868,6 +819,26 @@
             searchInput.focus();
             filterCards('');
             this.classList.remove('visible');
+        });
+
+        // ===== ТОГГЛ ФУНКЦИЙ =====
+        container.addEventListener('click', function(e) {
+            const btn = e.target.closest('.toggle-features-btn');
+            if (!btn) return;
+            const wrapper = btn.closest('.card-body').querySelector('.card-features-wrapper');
+            const label = btn.querySelector('.toggle-label');
+            const icon = btn.querySelector('.toggle-icon');
+            if (!wrapper) return;
+            const collapsed = wrapper.classList.contains('collapsed');
+            if (collapsed) {
+                wrapper.classList.remove('collapsed');
+                if (label) label.textContent = 'Скрыть';
+                if (icon) icon.classList.remove('rotated');
+            } else {
+                wrapper.classList.add('collapsed');
+                if (label) label.textContent = 'Показать';
+                if (icon) icon.classList.add('rotated');
+            }
         });
 
         // ===== ТЕНЬ ПРИ ПРОКРУТКЕ =====
